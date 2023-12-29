@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "posts/example_post_1/hello.html",
+    "href": "posts/example_post_1/hello.html",
+    "title": "Hello, Quarto",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "posts/example_post_1/hello.html#meet-quarto",
+    "href": "posts/example_post_1/hello.html#meet-quarto",
+    "title": "Hello, Quarto",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "posts/example_post_1/hello.html#meet-the-penguins",
+    "href": "posts/example_post_1/hello.html#meet-the-penguins",
+    "title": "Hello, Quarto",
+    "section": "Meet the penguins",
+    "text": "Meet the penguins\n\nThe penguins data from the palmerpenguins package contains size measurements for 344 penguins from three species observed on three islands in the Palmer Archipelago, Antarctica.\nThe plot below shows the relationship between flipper and bill lengths of these penguins."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This blog was started by two pharmacosisgnosist who realized that our field requires a diverse set of in-demand informatics skills but that there are limited University programs offering detailed instruction on code-based analysis of the wide array of analytical techniques we encounter every dat. Here we hope to share some of our own experience in using code to analyze the chemical and biological data a pharmacognosist is ikely to encounter in the modern era.\n(image created with DALL·E 3)"
+  },
+  {
+    "objectID": "posts/example_post_1/index.html",
+    "href": "posts/example_post_1/index.html",
+    "title": "Hello, Quarto",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "posts/example_post_1/index.html#meet-quarto",
+    "href": "posts/example_post_1/index.html#meet-quarto",
+    "title": "Hello, Quarto",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "posts/example_post_1/index.html#meet-the-penguins",
+    "href": "posts/example_post_1/index.html#meet-the-penguins",
+    "title": "Hello, Quarto",
+    "section": "Meet the penguins",
+    "text": "Meet the penguins\n\nThe penguins data from the palmerpenguins package contains size measurements for 344 penguins from three species observed on three islands in the Palmer Archipelago, Antarctica.\nThe plot below shows the relationship between flipper and bill lengths of these penguins."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "quarto_blog",
+    "section": "",
+    "text": "Visualize a MALDI spectrum in base R\n\n\n\n\n\n\n\nblogexample\n\n\nmass spectrometry\n\n\n\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\nChase M. Clark\n\n\n\n\n\n\n  \n\n\n\n\nHello, Quarto\n\n\n\n\n\n\n\nblogexample\n\n\n\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\nChase M. Clark\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nDec 29, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 26, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/example_post_2/ms.html",
+    "href": "posts/example_post_2/ms.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "Let’s visualize a spectrum in base R\n\nsample_spectrum &lt;- read.csv(\"https://metabolomics-usi.gnps2.org/csv/?usi1=mzspec%3AGNPS%3AGNPS-LIBRARY%3Aaccession%3ACCMSLIB00004679205\")\n\n\nplot(sample_spectrum, type=\"p\")\n\n\n\n# write r code to plot the spectrum as peaks\n\n\nThis displays a png\n\n\n\nCaption"
+  },
+  {
+    "objectID": "posts/example_post_2/index.html",
+    "href": "posts/example_post_2/index.html",
+    "title": "Visualize a MALDI spectrum in base R",
+    "section": "",
+    "text": "Just an example post until we get up and running\nLet’s visualize a spectrum in base R\n\nsample_spectrum &lt;- read.csv(\"https://metabolomics-usi.gnps2.org/csv/?usi1=mzspec%3AGNPS%3AGNPS-LIBRARY%3Aaccession%3ACCMSLIB00004679205\")\n\n\nplot(sample_spectrum, type=\"p\")\n\n\n\n# write r code to plot the spectrum as peaks\n\n\nThis displays a png\n\n\n\nCaption"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  }
+]

@@ -1,0 +1,20 @@
+FROM ubuntu:24.04
+
+
+RUN apt-get update && apt-get install -y wget curl bzip2 \
+    && curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba \
+    && ./bin/micromamba shell init -s bash -p ~/micromamba  
+
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb && \
+    dpkg -i quarto-1.3.450-linux-amd64.deb && \
+    rm quarto-1.3.450-linux-amd64.deb
+
+COPY base_environment.yml /tmp/env.yml
+
+RUN micromamba install -y -n base -f /tmp/env.yml && \
+    micromamba clean --all --yes
+
+# USER $MAMBA_USER
+# ARG MAMBA_DOCKERFILE_ACTIVATE=1
+
+# WORKDIR /home/blog

@@ -1,0 +1,27 @@
+---
+title: "Visualize a MALDI spectrum in base R"
+author: "Chase M. Clark"
+categories: [blogexample, mass spectrometry]
+date: "2023-12-30"
+---
+
+Just an example post until we get up and running 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Let's visualize a spectrum in base R
+
+```{r}
+sample_spectrum <- read.csv("https://metabolomics-usi.gnps2.org/csv/?usi1=mzspec%3AGNPS%3AGNPS-LIBRARY%3Aaccession%3ACCMSLIB00004679205")
+```
+
+```{r}
+plot(sample_spectrum, type="p")
+# write r code to plot the spectrum as peaks
+```
+
+
+# This displays a png
+![Caption](media/gnps_plipastatin_search.png)
