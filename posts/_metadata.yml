@@ -6,3 +6,14 @@ freeze: true
 
 # Enable banner style title blocks
 title-block-banner: true
+
+comments:
+  giscus: 
+    repo: quarto-dev/quarto-docs
+
+format:
+  html:
+      comments: 
+        hypothesis: true
+
+date-modified: last-modified

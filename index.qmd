@@ -1,5 +1,5 @@
 ---
-title: "quarto_blog"
+title: "Computational Pharmacognosy"
 listing:
   contents: posts
   sort: "date desc"

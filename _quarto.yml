@@ -2,10 +2,12 @@ project:
   type: website
 
 website:
-  title: "quarto_blog"
+  title: "Computational Pharmacognosy"
   navbar:
     right:
       - about.qmd
+      - chase.qmd
+      - joe.qmd
       - icon: github
         href: https://github.com/
       - icon: twitter
