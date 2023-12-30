@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "joe.html",
+    "href": "joe.html",
+    "title": "Joe",
+    "section": "",
+    "text": "This blog was started by two pharmacosisgnosist who realized that our field requires a diverse set of in-demand informatics skills but that there are limited University programs offering detailed instruction on code-based analysis of the wide array of analytical techniques we encounter every dat. Here we hope to share some of our own experience in using code to analyze the chemical and biological data a pharmacognosist is ikely to encounter in the modern era.\n(image created with DALL·E 3)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Pharmacognosy",
+    "section": "",
+    "text": "Visualize a MALDI spectrum in base R\n\n\n\n\n\n\nblogexample\n\n\nmass spectrometry\n\n\n\nJust an example post until we get up and running\n\n\n\n\n\nDec 30, 2023\n\n\nChase M. Clark\n\n\n\n\n\n\n\n\n\n\n\n\nHello!\n\n\n\n\n\n\n\n\nInformation about how this blog works and general info\n\n\n\n\n\nDec 30, 2023\n\n\nChase M Clark\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/example_post_1/index.html",
+    "href": "posts/example_post_1/index.html",
+    "title": "Hello!",
+    "section": "",
+    "text": "A major issue when writing code/computational analyses for science is ensuring the code is reproducible. There’s a ton of work that goes on behind the scenes to make code and data FAIR, reproducible, and broadly useful across computational platforms. For now I’ll leave all of that undefined and abstract, hopefully in the future we’ll have time write about those steps in more detail.\nFor the puropose of this postI wanted to highlight what we’ve done to setup this Blog to not only explain how certain computational analyses are performed but to also ensure that each post is able to reproduced by anyone during their learning journey.\n\nEach post lives in its own directory.\nEach post directory contains a Dockerfile which contains all the dependencies necessary to run the scripts in the post. If not, the post will mention/describe what is missing or why Docker couldn’t be used. If there is no Dockerfile then it should be assumed the base Dockerfile of the blog was used.\nThe entire Blog is rendered/compiled with Quarto, “An open-source scientific and technical publishing system”. This enables us to write posts as Jupyter notebooks (.ipynb files), Quarto documents (.qmd files), Rmarkdown (.rmd files) and likely more. This provides us flexibility to demonstrate different skills all within a single publishing framework.\n\nThough most posts will not be modified there may be cases where we would like to expand/contract/modify/clarify/etc a post. In other words posts shouldn’t be considered static, and if our systems are working they should automatically have a modified date alongside the original published date.\nIf you find a post helpful or would like to add to the discussion there should be a place for you to do so at the bottom of each post, which works through Quarto integration with giscus. We’re still new to this (and will see how much moderation it requires) but it basically automates the synchronization of GitHub Discussions with comment sections within each post."
+  },
+  {
+    "objectID": "posts/example_post_2/index.html",
+    "href": "posts/example_post_2/index.html",
+    "title": "Visualize a MALDI spectrum in base R",
+    "section": "",
+    "text": "Let’s visualize a spectrum in base R\n\nsample_spectrum &lt;- read.csv(\"https://metabolomics-usi.gnps2.org/csv/?usi1=mzspec%3AGNPS%3AGNPS-LIBRARY%3Aaccession%3ACCMSLIB00004679205\")\n\nplot(sample_spectrum, type=\"p\")\n\n\n\n\n\n\n\n\n\n\nThis is a webR-enabled code cell in a Quarto HTML document.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nThis displays a png\n\n\n\nCaption"
+  },
+  {
+    "objectID": "chase.html",
+    "href": "chase.html",
+    "title": "Chase",
+    "section": "",
+    "text": "This blog was started by two pharmacosisgnosist who realized that our field requires a diverse set of in-demand informatics skills but that there are limited University programs offering detailed instruction on code-based analysis of the wide array of analytical techniques we encounter every dat. Here we hope to share some of our own experience in using code to analyze the chemical and biological data a pharmacognosist is ikely to encounter in the modern era.\n(image created with DALL·E 3)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This blog was started by two pharmacosisgnosist who realized that our field requires a diverse set of in-demand informatics skills but that there are limited University programs offering detailed instruction on code-based analysis of the wide array of analytical techniques we encounter every dat. Here we hope to share some of our own experience in using code to analyze the chemical and biological data a pharmacognosist is ikely to encounter in the modern era.\n(image created with DALL·E 3)"
+  }
+]
