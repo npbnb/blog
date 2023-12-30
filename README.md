@@ -2,8 +2,6 @@ Each blog post will have its own directory
 A blog post can be written as a quarto or jupyter notebook
 The directory should contain a dockerfile used to build/run the notebook
 
-
-
 # Building a post
 
 There's a base Ubuntu docker image that contains Quarto and Jupyter; it lives at `site_utils/base_dockerfile`.
