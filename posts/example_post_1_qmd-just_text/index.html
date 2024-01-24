@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chase M Clark">
+<meta name="dcterms.date" content="2023-12-30">
+<meta name="description" content="Information about how this blog works and general info">
 
-<title>Computational Pharmacognosy</title>
+<title>Computational Pharmacognosy - Hello!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +69,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
 <script>
-
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
+    document.body.classList.add('hypothesis-enabled');
   });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
 </script>
 
-<link rel="stylesheet" href="styles.css">
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +87,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Computational Pharmacognosy</span>
     </a>
   </div>
@@ -149,11 +98,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about/about.html"> 
+    <a class="nav-link" href="../../about/about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -162,11 +111,11 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-contributors">    
         <li>
-    <a class="dropdown-item" href="./contributors/chase/chase.html">
+    <a class="dropdown-item" href="../../contributors/chase/chase.html">
  <span class="dropdown-text">Chase</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./contributors/joe/joe.html">
+    <a class="dropdown-item" href="../../contributors/joe/joe.html">
  <span class="dropdown-text">Joe</span></a>
   </li>  
     </ul>
@@ -186,15 +135,39 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Computational Pharmacognosy</h1>
-                      </div>
+    <div class="quarto-title column-page">
+      <h1 class="title">Hello!</h1>
+                  <div>
+        <div class="description">
+          Information about how this blog works and general info
+        </div>
+      </div>
+                </div>
   </div>
     
-  
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta-author column-page">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://chasemc.github.io">Chase Clark</a> <a href="https://orcid.org/0000-0001-6439-9397" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              University of Wisconsin-Madison
+            </p>
+        </div>
+    </div>
 
-      
+  <div class="quarto-title-meta column-page">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 30, 2023</p>
+      </div>
+    </div>
     
       
     </div>
@@ -203,151 +176,31 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
 
+<p>A major issue when writing code/computational analyses for science is ensuring the code is reproducible. There’s a ton of work that goes on behind the scenes to make code and data FAIR, reproducible, and broadly useful across computational platforms. For now I’ll leave all of that undefined and abstract, hopefully in the future we’ll have time write about those steps in more detail.</p>
+<p>For the puropose of this postI wanted to highlight what we’ve done to setup this Blog to not only explain how certain computational analyses are performed but to also ensure that each post is able to reproduced by anyone during their learning journey.</p>
+<ol type="1">
+<li>Each post lives in its own directory.</li>
+<li>Each post directory contains a Dockerfile which contains all the dependencies necessary to run the scripts in the post. If not, the post will mention/describe what is missing or why Docker couldn’t be used. If there is no Dockerfile then it should be assumed the base Dockerfile of the blog was used.</li>
+<li>The entire Blog is rendered/compiled with <a href="https://quarto.org" target="_blank">Quarto</a>, “An open-source scientific and technical publishing system”. This enables us to write posts as Jupyter notebooks (.ipynb files), Quarto documents (.qmd files), Rmarkdown (.rmd files) and likely more. This provides us flexibility to demonstrate different skills all within a single publishing framework.</li>
+</ol>
+<p>Though most posts will not be modified there may be cases where we would like to expand/contract/modify/clarify/etc a post. In other words posts shouldn’t be considered static, and if our systems are working they should automatically have a modified date alongside the original published date.</p>
+<p>If you find a post helpful or would like to add to the discussion there should be a place for you to do so at the bottom of each post, which works through Quarto integration with <a href="https://github.com/giscus/giscus" target="_blank">giscus</a>. We’re still new to this (and will see how much moderation it requires) but it basically automates the synchronization of GitHub Discussions with comment sections within each post.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="" data-listing-date-sort="1704175200000" data-listing-file-modified-sort="1705761619636" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2731">
-<div class="thumbnail">
-<p><a href="./posts/intro_to_mass_spec_in_r_2024_01_02/index.html" class="no-external"></a></p><a href="./posts/intro_to_mass_spec_in_r_2024_01_02/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/intro_to_mass_spec_in_r_2024_01_02/index_files/figure-html/unnamed-chunk-8-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/intro_to_mass_spec_in_r_2024_01_02/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro_to_mass_spec_in_r_2024_01_02/index.html" class="no-external">Introduction to Mass Spectrometry Analysis in R</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/intro_to_mass_spec_in_r_2024_01_02/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-</div>
-<div class="listing-description">
-<a href="./posts/intro_to_mass_spec_in_r_2024_01_02/index.html" class="no-external">First in a series of posts about what mass spectrometry data looks like, using R</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/intro_to_mass_spec_in_r_2024_01_02/index.html" class="no-external">
-<div class="listing-date">
-Jan 2, 2024
-</div>
-<div class="listing-author">
-Chase M Clark
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="" data-listing-date-sort="1704175200000" data-listing-file-modified-sort="1705761619636" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="127">
-<div class="thumbnail">
-<p><a href="./posts/intro_to_cheminformatics/index.html" class="no-external"></a></p><a href="./posts/intro_to_cheminformatics/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/intro_to_cheminformatics/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro_to_cheminformatics/index.html" class="no-external">Introduction to Mass Spectrometry Analysis in R</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/intro_to_cheminformatics/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-</div>
-<div class="listing-description">
-<a href="./posts/intro_to_cheminformatics/index.html" class="no-external">Introduction to cheminformatics</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/intro_to_cheminformatics/index.html" class="no-external">
-<div class="listing-date">
-Jan 2, 2024
-</div>
-<div class="listing-author">
-Chase M Clark
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="" data-listing-date-sort="1704175200000" data-listing-file-modified-sort="1705761619652" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="36">
-<div class="thumbnail">
-<p><a href="./posts/series_reproducibility/index.html" class="no-external"></a></p><a href="./posts/series_reproducibility/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/series_reproducibility/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/series_reproducibility/index.html" class="no-external">Introduction to reproducible computing</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/series_reproducibility/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-</div>
-<div class="listing-description">
-<a href="./posts/series_reproducibility/index.html" class="no-external">Introduction to reproducible computing</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/series_reproducibility/index.html" class="no-external">
-<div class="listing-date">
-Jan 2, 2024
-</div>
-<div class="listing-author">
-Chase M Clark
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="" data-listing-date-sort="1704175200000" data-listing-file-modified-sort="1705761619652" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/series_reproducibility/docker/index.html" class="no-external"></a></p><a href="./posts/series_reproducibility/docker/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/series_reproducibility/docker/media/01-primary-blue-docker-logo.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/series_reproducibility/docker/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/series_reproducibility/docker/index.html" class="no-external">Introduction to reproducible computing: Docker</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/series_reproducibility/docker/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-</div>
-<div class="listing-description">
-<a href="./posts/series_reproducibility/docker/index.html" class="no-external">Introduction to reproducible computing; Docker</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/series_reproducibility/docker/index.html" class="no-external">
-<div class="listing-date">
-Jan 2, 2024
-</div>
-<div class="listing-author">
-Chase M Clark
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-clark2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Clark, Chase M. 2023. <span>“Hello!”</span> December 30, 2023. <a href="https://code4np.github.io/posts/example_post_1_qmd-just_text">https://code4np.github.io/posts/example_post_1_qmd-just_text</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -730,6 +583,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="quarto-dev/quarto-docs" data-repo-id="" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 
 

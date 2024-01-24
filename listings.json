@@ -2,8 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/example_post_1/index.html",
-      "/posts/example_post_2/index.html"
+      "/posts/intro_to_mass_spec_in_r_2024_01_02/index.html",
+      "/posts/intro_to_cheminformatics/index.html",
+      "/posts/series_reproducibility/index.html",
+      "/posts/series_reproducibility/docker/index.html"
     ]
   }
 ]
