@@ -25,3 +25,5 @@ filters:
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 execute:
   freeze: auto
+
+license: CC BY 4.0
