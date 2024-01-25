@@ -1,8 +1,5 @@
 # options specified here will apply to all posts in this folder
 
-# freeze computational output
-# (see https://quarto.org/docs/projects/code-execution.html#freeze)
-freeze: true
 
 # Enable banner style title blocks
 title-block-banner: true
@@ -15,5 +12,16 @@ format:
   html:
       comments: 
         hypothesis: true
+      code-block-bg: "#d6d6d6"
+      code-block-border-left: "#31BAE9"
+      toc: true
+      toc-expand: 3
+      template-partials:
+        - title-metadata.html
+filters:
+    - openlinksinnewpage
 
-date-modified: last-modified
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+execute:
+  freeze: auto

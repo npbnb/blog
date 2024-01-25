@@ -1,0 +1,27 @@
+---
+title: "Hello!"
+author:
+  - name: 
+      given: Chase
+      family: Clark
+      non-dropping-particle: M
+    roles: [original draft, review & editing]
+    url: https://chasemc.github.io
+    affiliation: University of Wisconsin-Madison
+    orcid: 0000-0001-6439-9397
+categories: []
+date: "2023-12-30"
+description: "Information about how this blog works and general info"
+draft: false
+appendix-cite-as: display
+funding: "The author(s) received no specific funding for this work."
+citation: true
+format:
+  html:
+    df-print: paged
+    template-partials:
+    - title-metadata.html
+---
+
+
+
