@@ -67,9 +67,6 @@ confidently_destroy: destroy
 	 +
 
 
-
-
-
 # https://stackoverflow.com/a/6273809/1826109
 %:
 	@:

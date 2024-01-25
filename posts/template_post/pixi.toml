@@ -5,7 +5,6 @@ platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 
 [tasks]
 install_python_package_from_git= {cmd="pip install git+https://github.com/socialgene/sgpy@63c15e7367c6b31d47802412d03ae47c6f6a0b8b"}
-bro="which python"
 
 [dependencies]
 python = "==3.12.1"
