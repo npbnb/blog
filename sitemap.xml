@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://code4np.github.io/posts/series_reproducibility/index.html</loc>
-    <lastmod>2024-01-20T14:40:19.652Z</lastmod>
+    <loc>https://code4np.github.io/contributors/chase/chase.html</loc>
+    <lastmod>2024-01-25T20:04:59.196Z</lastmod>
   </url>
   <url>
-    <loc>https://code4np.github.io/posts/intro_to_cheminformatics/index.html</loc>
-    <lastmod>2024-01-20T14:40:19.636Z</lastmod>
-  </url>
-  <url>
-    <loc>https://code4np.github.io/posts/intro_to_mass_spec_in_r_2024_01_02/index.html</loc>
-    <lastmod>2024-01-20T14:40:19.636Z</lastmod>
-  </url>
-  <url>
-    <loc>https://code4np.github.io/contributors/joe/joe.html</loc>
-    <lastmod>2024-01-20T14:40:46.848Z</lastmod>
+    <loc>https://code4np.github.io/posts/template_post/index.html</loc>
+    <lastmod>2024-01-25T20:04:59.196Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/index.html</loc>
-    <lastmod>2024-01-17T15:21:42.592Z</lastmod>
-  </url>
-  <url>
-    <loc>https://code4np.github.io/contributors/chase/chase.html</loc>
-    <lastmod>2024-01-20T14:40:46.848Z</lastmod>
+    <lastmod>2024-01-25T20:04:59.196Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/about/about.html</loc>
-    <lastmod>2024-01-20T14:40:46.848Z</lastmod>
+    <lastmod>2024-01-25T20:04:59.196Z</lastmod>
   </url>
   <url>
-    <loc>https://code4np.github.io/posts/series_reproducibility/docker/index.html</loc>
-    <lastmod>2024-01-20T14:40:19.652Z</lastmod>
+    <loc>https://code4np.github.io/contributors/joe/joe.html</loc>
+    <lastmod>2024-01-25T20:04:59.196Z</lastmod>
   </url>
 </urlset>
