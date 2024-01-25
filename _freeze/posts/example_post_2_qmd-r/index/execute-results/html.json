@@ -1,0 +1,17 @@
+{
+  "hash": "af741d6ebfb6367fc596b19e54523c62",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Visualize a MALDI spectrum in base R\"\nauthor: \"Chase M. Clark\"\ncategories: [blogexample, mass spectrometry]\ndate: \"2023-12-30\"\ndescription: \"Just an example post until we get up and running\"\nengine: knitr\nfilters:\n  - webr\nformat:\n  html:\n    fig-width: 8\n    fig-height: 8\ndraft: true    \n---\n\n\n\n\n# Let's visualize a spectrum in base R\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsample_spectrum <- read.csv(\"https://metabolomics-usi.gnps2.org/csv/?usi1=mzspec%3AGNPS%3AGNPS-LIBRARY%3Aaccession%3ACCMSLIB00004679205\")\nplot(sample_spectrum, type = \"p\")\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=768}\n:::\n:::\n\n\n\n# This is a webR-enabled code cell in a Quarto HTML document.\n\n```{webr-r}\nfit <- lm(mpg ~ am, data = mtcars)\n\nsummary(fit)\n```\n\n\n\n\n# This displays a png\n![Caption](media/gnps_plipastatin_search.png)\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

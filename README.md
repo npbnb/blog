@@ -25,3 +25,20 @@ popd
 ```
 
 
+
+
+# If you've written a post as a Jupyter notebook
+
+```
+pushd posts/example_post_3_jupyter
+docker build . -t npbnb_post
+docker run -v $PWD:/blog  npbnb_post quarto convert blog/index.ipynb --output blog/index.qmd
+```
+
+Adjust the header block of the resulting .qmd file then render
+
+```
+docker run -v $PWD:/blog npbnb_post quarto render blog/index.qmd
+popd
+```
+

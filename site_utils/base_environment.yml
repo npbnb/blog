@@ -1,4 +1,4 @@
-name: base
+name: code4np_base
 
 channels:
   - conda-forge
@@ -7,6 +7,8 @@ channels:
 
 dependencies:
   - python=3.10
+  - conda-forge::jupyter==1.0.0
+  - conda-forge::jupyterlab==4.0.10
   - conda-forge::r-base==4.3.2
   - conda-forge::notebook==7.0.6
   - conda-forge::nbconvert==7.13.1

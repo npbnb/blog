@@ -5,13 +5,30 @@ website:
   title: "Computational Pharmacognosy"
   navbar:
     right:
-      - about.qmd
-      - chase.qmd
-      - joe.qmd
+      - text: Posts
+        href: index.html
+      - text: About
+        file: about/about.qmd
+      - sidebar:contributors
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/Code4NP/code4np.github.io
+
+
+  sidebar:
+    - id: contributors
+      title: "Contributors"
+      style: "docked"
+      background: light
+      collapse-level: 2
+      contents: 
+        - text: Chase
+          file: contributors/chase/chase.qmd
+        - text: Joe
+          file: contributors/joe/joe.qmd
+
+
+
+  site-url: https://code4np.github.io
 format:
   html:
     theme: cosmo

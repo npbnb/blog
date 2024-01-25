@@ -1,0 +1,10 @@
+mass spectrometry
+nuclear magnetic resonance 
+genomics
+metagenomics
+intro
+advanced
+python
+r
+bash
+nextflow
