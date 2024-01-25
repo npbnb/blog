@@ -54,7 +54,7 @@ description: "Introduction to reproducible computing; Docker"
 ---
 ```
 
-Make sure to at least include the fields shown in the minimal example.
+Make sure to at least include the fields shown in the minimal example. Additional options can be found here: https://quarto.org/docs/reference/formats/html.html
 
 ## Creating a post
 
