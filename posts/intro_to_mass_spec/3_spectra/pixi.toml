@@ -8,6 +8,7 @@ platforms = ["linux-64"]
 [tasks]
 
 [dependencies]
+quarto = "==1.4.550"
 r-base = "4.3.*"
 r-rmarkdown = ""
 r-knitr = ""

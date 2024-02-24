@@ -366,6 +366,80 @@ package:
   size: 94895
   timestamp: 1701860161671
 - platform: linux-64
+  name: dart-sass
+  version: 1.58.3
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/linux-64/dart-sass-1.58.3-ha770c72_1.conda
+  hash:
+    md5: d54982a58cd9be3d00a7efe76ba6f60c
+    sha256: a94f8024ac8a09cbf265c62d2bd57e709802868ef656c6cafe5864ed20bf94af
+  build: ha770c72_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 2961769
+  timestamp: 1683598364427
+- platform: linux-64
+  name: deno
+  version: 1.37.2
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  url: https://conda.anaconda.org/conda-forge/linux-64/deno-1.37.2-h335b0a9_1.conda
+  hash:
+    md5: 50fe6d0064adfd83846a6f9c87da03e3
+    sha256: b14a2f951839e1b511283ed135d31e1168e62c6f360d00ba55a52e38d2ed1e34
+  build: h335b0a9_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 33937403
+  timestamp: 1698785299272
+- platform: linux-64
+  name: deno-dom
+  version: 0.1.35
+  category: main
+  manager: conda
+  dependencies:
+  - deno >=1.24.2
+  url: https://conda.anaconda.org/conda-forge/linux-64/deno-dom-0.1.35-hd9586b0_1.conda
+  hash:
+    md5: 263ee0870b18b013d9ec8539113ac69f
+    sha256: 386c157bf2eebe4fc58e63c26784d084eaa71cf1020257c30a430624631415fd
+  build: hd9586b0_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 1062480
+  timestamp: 1682953401972
+- platform: linux-64
+  name: esbuild
+  version: 0.19.2
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/linux-64/esbuild-0.19.2-ha770c72_0.conda
+  hash:
+    md5: 8fa87b764cf6143cb66e9cc3548b186a
+    sha256: bb6dee100b3f62ee088a212834c9d47ad158f3fc678ff595e402803db5fab871
+  build: ha770c72_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  size: 3376650
+  timestamp: 1693243729127
+- platform: linux-64
   name: expat
   version: 2.5.0
   category: main
@@ -1634,22 +1708,22 @@ package:
   timestamp: 1706635653339
 - platform: linux-64
   name: pandoc
-  version: 3.1.12.1
+  version: 3.1.11.1
   category: main
   manager: conda
   dependencies: []
-  url: https://conda.anaconda.org/conda-forge/linux-64/pandoc-3.1.12.1-ha770c72_0.conda
+  url: https://conda.anaconda.org/conda-forge/linux-64/pandoc-3.1.11.1-ha770c72_0.conda
   hash:
-    md5: 8a2a2bc548b25a1966a1490c87b23b28
-    sha256: 699319af13c36ddfe246f9260bf17b29dcc095b50ed6f29a4d568a6a085bcbfb
+    md5: 0e2f14aff42adf4675bcd5335d644a5f
+    sha256: 30b1318dbf7a89d4b2f66a9b10c8799376a32506043a510e1d27ba286c564633
   build: ha770c72_0
   arch: x86_64
   subdir: linux-64
   build_number: 0
   license: GPL-2.0-or-later
   license_family: GPL
-  size: 20942005
-  timestamp: 1708248934898
+  size: 20502973
+  timestamp: 1707474170203
 - platform: linux-64
   name: pango
   version: 1.50.14
@@ -1736,6 +1810,29 @@ package:
   license_family: MIT
   size: 5625
   timestamp: 1606147468727
+- platform: linux-64
+  name: quarto
+  version: 1.4.550
+  category: main
+  manager: conda
+  dependencies:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.11.1,<3.1.12.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/quarto-1.4.550-ha770c72_1.conda
+  hash:
+    md5: b7b89be76bcdab239f7956e5fc2727ab
+    sha256: 2fd62d66eb6a08b95ba8933aaff7a0e3241c7ced93b5114a3b1e8d28ee24b330
+  build: ha770c72_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15312136
+  timestamp: 1708104283642
 - platform: linux-64
   name: r-base
   version: 4.3.2
