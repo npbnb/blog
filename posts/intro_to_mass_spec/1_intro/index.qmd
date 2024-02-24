@@ -4,9 +4,8 @@ author:
   - name: Chase M Clark
     orcid: 0000-0001-6439-9397
     roles: [original draft, review & editing]
-
 categories: ["mass spectrometry", "r"]
-date: "2024-01-02"
+date: "2024-02-01"
 description: "First in a series of introductory posts about working with mass spectrometry data in R"
 execute: 
   cache: true

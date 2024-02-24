@@ -5,7 +5,7 @@ author:
     orcid: 0000-0001-6439-9397
     roles: [original draft, review & editing]
 ["mass spectrometry", "r"]
-date: "2024-02-24"
+date: "2024-02-02"
 description: "What mass spectrometry data looks like, using R"
 execute: 
   cache: true
