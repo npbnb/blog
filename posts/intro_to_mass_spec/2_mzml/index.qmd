@@ -1,0 +1,125 @@
+---
+title: "Part 2: Anatomy of an mzXML/mzML file"
+author:
+  - name: Chase M Clark
+    orcid: 0000-0001-6439-9397
+    roles: [original draft, review & editing]
+categories: []
+date: "2024-02-24"
+description: "What mass spectrometry data looks like, using R"
+execute: 
+  cache: true
+format:
+  html:
+    df-print: paged
+filters:
+  - collapse-callout
+collapse-callout:
+  all: true  
+---
+
+This is a continuation from [Part 1](../1_intro/).
+
+
+# Introduction
+
+As hinted by the name of its predecessor (mzXML), mzML is an [XML](https://en.wikipedia.org/wiki/XML) file, which is a highly-structured "Markup Language". The current specifications for mzML, as well as example files, can be found over at [https://www.psidev.info/mzml](https://www.psidev.info/mzml).
+
+Take a second and go look at an example mzML file over on HUPO-PSI's [GitHub repo](https://github.com/HUPO-PSI/mzML/blob/master/examples/tiny.msdata.mzML0.99.10.mzML). The main thing to notice is that it is highly structured and there's a lot of additional metadata contained in this file beyond *m/z* and intensity. This can be important for certain analysis (e.g. for MALDI, the metadata will contain sample location information).
+
+# How to approach reading the file
+
+If you happen to have experience with HTML code it's quite similar to XML. The important thing to note is there are "tags" that the denote the start and end of certain info and these can be nested within each other. For example:
+
+```{.python code-line-numbers="true"}
+<dataProcessing id="Xcalibur Processing" softwareRef="Xcalibur"> # <1>
+    <processingMethod order="1"> # <2>
+        <cvParam cvLabel="MS" accession="MS:1000033" name="deisotoping" value="false"/> # <3>
+        <cvParam cvLabel="MS" accession="MS:1000034" name="charge deconvolution" value="false"/> # <4>
+        <cvParam cvLabel="MS" accession="MS:1000035" name="peak picking" value="true"/> # <5>
+    </processingMethod> # <6>
+</dataProcessing> # <7>
+```
+
+1. Opens the `dataProcessing` tag and defines the properties of 'id' and 'softwareRef'; the last line `</dataProcessing>` closes the "dataProcessing" tag. 
+2. Defines the `processingMethod` with the property `order="1"`.
+3. Defines a `cvParam` tag which uses properties from the controlled mzML ontology to let us know no deisotoping was performed.
+4. Defines a `cvParam` tag which uses properties from the controlled mzML ontology to let us know no charge deconvolution was performed.
+5. Defines a `cvParam` tag which uses properties from the controlled mzML ontology to let us know peak peaking was performed.
+6. Closes the `processingMethod` tag.
+7. Closes the `dataProcessing` tag. 
+
+
+Usually mzML files are indented which allows you to easily discern which tags are nested under which other tags; but there is technically no requirement that there be indentations.
+
+# Where are the spectra?
+
+Another thing you may have noticed is that there are no obvious spectra in this mzML file. No table, comma separated numbers, nothin'. 
+
+The spectra are indeed there, just kind of hidden between the `<spectrumList count="2">... <spectrumList>` tags ([L108-201](https://github.com/HUPO-PSI/mzML/blob/741ef7bce7adcf687271a718bd434ee6da0cb2e0/examples/tiny.msdata.mzML0.99.10.mzML#L108C7-L201)). The `<spectrumList count="2">` tag tells us that we can expect two spectra and below I'll walk you through how to read one of those.
+
+Here are [lines 109-45](https://github.com/HUPO-PSI/mzML/blob/741ef7bce7adcf687271a718bd434ee6da0cb2e0/examples/tiny.msdata.mzML0.99.10.mzML#L109-L145) of the mzML file denoting a single MS spectrum.
+
+```{.python code-line-numbers="true"}
+<spectrum index="0" id="S19" nativeID="19" defaultArrayLength="10"> # <1>
+  <cvParam cvRef="MS" accession="MS:1000580" name="MSn spectrum" value=""/> # <2>
+  <cvParam cvRef="MS" accession="MS:1000511" name="ms level" value="1"/> # <3>
+  <spectrumDescription> # <4>
+    <cvParam cvRef="MS" accession="MS:1000127" name="centroid mass spectrum" value=""/> # <4>
+    <cvParam cvRef="MS" accession="MS:1000528" name="lowest m/z value" value="400.39"/> # <4>
+    <cvParam cvRef="MS" accession="MS:1000527" name="highest m/z value" value="1795.56"/> # <4>
+    <cvParam cvRef="MS" accession="MS:1000504" name="base peak m/z" value="445.347"/> # <4>
+    <cvParam cvRef="MS" accession="MS:1000505" name="base peak intensity" value="120053"/> # <4>
+    <cvParam cvRef="MS" accession="MS:1000285" name="total ion current" value="16675500"/> # <4>
+    <scan instrumentConfigurationRef="LCQDeca"> # <4>
+      <referenceableParamGroupRef ref="CommonMS1SpectrumParams"/> # <4>
+      <cvParam cvRef="MS" accession="MS:1000016" name="scan time" value="5.8905" unitAccession="MS:1000038" unitName="minute"/> # <4>
+      <cvParam cvRef="MS" accession="MS:1000512" name="filter string" value="+ c NSI Full ms [ 400.00-1800.00]"/> # <4>
+      <scanWindowList count="1"> # <4>
+        <scanWindow> # <4>
+          <cvParam cvRef="MS" accession="MS:1000501" name="scan m/z lower limit" value="400"/> # <4>
+          <cvParam cvRef="MS" accession="MS:1000500" name="scan m/z upper limit" value="1800"/> # <4>
+        </scanWindow> # <4>
+      </scanWindowList> # <4>
+    </scan> # <4>
+  </spectrumDescription> # <4>
+  <binaryDataArrayList count="2"> # <5>
+    <binaryDataArray arrayLength="10" encodedLength="108" dataProcessingRef="XcaliburProcessing"> # <6>
+      <cvParam cvRef="MS" accession="MS:1000523" name="64-bit float" value=""/> # <7>
+      <cvParam cvRef="MS" accession="MS:1000576" name="no compression" value=""/> # <8>
+      <cvParam cvRef="MS" accession="MS:1000514" name="m/z array" value=""/> # <9>
+      <binary>AAAAAAAAAAAAAAAAAADwPwAAAAAAAABAAAAAAAAACEAAAAAAAAAQQAAAAAAAABRAAAAAAAAAGEAAAAAAAAAcQAAAAAAAACBAAAAAAAAAIkA=</binary> # <10>
+    </binaryDataArray> # <11>
+    <binaryDataArray arrayLength="10" encodedLength="108" dataProcessingRef="XcaliburProcessing"> # <12>
+      <cvParam cvRef="MS" accession="MS:1000523" name="64-bit float" value=""/> # <12>
+      <cvParam cvRef="MS" accession="MS:1000576" name="no compression" value=""/> # <12>
+      <cvParam cvRef="MS" accession="MS:1000515" name="intensity array" value=""/> # <12>
+      <binary>AAAAAAAAJEAAAAAAAAAiQAAAAAAAACBAAAAAAAAAHEAAAAAAAAAYQAAAAAAAABRAAAAAAAAAEEAAAAAAAAAIQAAAAAAAAABAAAAAAAAA8D8=</binary> # <12>
+    </binaryDataArray> # <12>
+  </binaryDataArrayList> # <13>
+</spectrum> # <14>
+```
+
+1. Opens the spectrum tag and tells us the spectrum within should have 10 *m/z* data points.
+2. It is part of an MSn experiment.
+3. And it represents an MS^1^ acquisition.
+4. This block (click bullet number to left of this text to highlight) contains summary metadata about the spectrum and its acquisition.
+5. This line informs us that there are two binary arrays within this tag/section.
+6. Open tag of a single data array (i.e. list). Has properties telling us array is a binary string 108 characters long, there will be 10 data points when decoded, and was created with Thermo's XcaliburProcessing software
+7. The data points will be [64-bit floating point numbers](64-bit floating point numbers) (i.e. numbers precise to ~16 decimals).
+8. The data is not compressed.
+9. This tag/section informs us that the binary array contains the *m/z* values for this spectrum.
+10. The binary data which, when decoded, will contain 10 *m/z* data points. (ie half the data of the spectrum)
+11. End of the first data array.
+12.  The second data array can be ready the same as the first, but contains the intensity value data points.
+13. Closes the binaryDataArrayList.
+14. Closes the first spectrum.
+
+
+I'll leave it to the reader to look through the second spectrum ([lines 146-200](https://github.com/HUPO-PSI/mzML/blob/741ef7bce7adcf687271a718bd434ee6da0cb2e0/examples/tiny.msdata.mzML0.99.10.mzML#L146-L200)) which contains MS^2^ data from the fragmentation of a 445.34  ion.
+
+
+# Next
+
+In the [next post](../3_spectra/) we will dive into some actual code and how to work with LC-MS/MS data using the R programming language.
+

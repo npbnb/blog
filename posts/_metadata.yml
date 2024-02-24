@@ -15,7 +15,7 @@ format:
       code-block-bg: "#d6d6d6"
       code-block-border-left: "#31BAE9"
       toc: true
-      toc-expand: 3
+      toc-expand: 5
       template-partials:
         - title-metadata.html
 filters:
