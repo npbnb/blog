@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chase M Clark">
-<meta name="dcterms.date" content="2024-01-02">
+<meta name="dcterms.date" content="2024-02-03">
 <meta name="description" content="An introduction to working with mass spectrometry data in R">
 
 <title>Computational Pharmacognosy - Part 3: Reading mzXML/mzML into R</title>
@@ -178,7 +178,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           An introduction to working with mass spectrometry data in R
         </div>
       </div>
-                </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">mass spectrometry</div>
+                <div class="quarto-category">r</div>
+              </div>
+                  </div>
   </div>
     
   <div class="quarto-title-meta-author">
@@ -203,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 2, 2024</p>
+        <p class="date">February 3, 2024</p>
       </div>
     </div>
     
@@ -288,16 +292,9 @@ Experimental info
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"mzR"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>code for methods in class "Rcpp_Pwiz" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
-code for methods in class "Rcpp_Pwiz" was not checked for suspicious field assignments (recommended package 'codetools' not available?)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>code for methods in class "Rcpp_Ident" was not checked for suspicious field assignments (recommended package 'codetools' not available?)
-code for methods in class "Rcpp_Ident" was not checked for suspicious field assignments (recommended package 'codetools' not available?)</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mzR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mzR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="download-lc-msms-example-data" class="level2">
@@ -311,40 +308,40 @@ code for methods in class "Rcpp_Ident" was not checked for suspicious field assi
 <p><a href="https://gnps.ucsd.edu/ProteoSAFe/static/gnps-splash.jsp" target="_blank">GNPS</a> used to require mzXML so that’s the reason for both mzXML and mzML formats.</p>
 <p>Warning: This is a 22 MB and 306 MB download.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I have slow internet so I'll increase the amount of time the download is allowed to take</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout=</span><span class="dv">240</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>temporary_directory <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 22.3 MB</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#peaks_file_path &lt;- file.path(temporary_directory, "B022.mzXML" )</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/peak/B022.mzXML",</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#              destfile = peaks_file_path)</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#              </span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>peaks_file_path <span class="ot">&lt;-</span> <span class="st">"/home/chase/Downloads/biggy/B022.mzXML"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 306.1 MB</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># raw_mzml_path &lt;- file.path(temporary_directory, "B022.mzML" )</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/raw/FullSpectra-mzML/B022_GenbankAccession-KY858245.mzML",</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#               destfile = raw_mzml_path)</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>raw_mzml_path <span class="ot">&lt;-</span> <span class="st">"/home/chase/Downloads/biggy/B022.mzML"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I have slow internet so I'll increase the amount of time the download is allowed to take</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout=</span><span class="dv">240</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>temporary_directory <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 22.3 MB</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#peaks_file_path &lt;- file.path(temporary_directory, "B022.mzXML" )</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/peak/B022.mzXML",</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#              destfile = peaks_file_path)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#              </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>peaks_file_path <span class="ot">&lt;-</span> <span class="st">"/home/chase/Downloads/biggy/B022.mzXML"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 306.1 MB</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># raw_mzml_path &lt;- file.path(temporary_directory, "B022.mzML" )</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/raw/FullSpectra-mzML/B022_GenbankAccession-KY858245.mzML",</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#               destfile = raw_mzml_path)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>raw_mzml_path <span class="ot">&lt;-</span> <span class="st">"/home/chase/Downloads/biggy/B022.mzML"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="how-to-open-mzxmlmzml-data-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-open-mzxmlmzml-data-in-r">How to open mzXML/mzML data in R</h2>
 <p>If we look at the first ten lines of:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>peaks_file_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>peaks_file_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/home/chase/Downloads/biggy/B022.mzXML"</code></pre>
 </div>
 </div>
 <p>We can see it is indeed an mzXML file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">readLines</span>(peaks_file_path, <span class="at">n=</span><span class="dv">10</span>), <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">readLines</span>(peaks_file_path, <span class="at">n=</span><span class="dv">10</span>), <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
 &lt;mzXML xmlns="http://sashimi.sourceforge.net/schema_revision/mzXML_3.2"
@@ -361,8 +358,8 @@ code for methods in class "Rcpp_Ident" was not checked for suspicious field assi
 <p>I’m a fan of mzR due to its speed (under the hood is a lot of fast C++ code), and that it lazily loads the data from mzXML/mzML files (it doesn’t read everything into memory unless you request it).</p>
 <p>Here we will tell mzR to lazily open the mass spec file we just downloaded. We can see it returns a handle to the file, which contains 4399 “scans”. A scan being a mass spectrum.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>msfile_handle <span class="ot">&lt;-</span> mzR<span class="sc">::</span><span class="fu">openMSfile</span>(peaks_file_path)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>msfile_handle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>msfile_handle <span class="ot">&lt;-</span> mzR<span class="sc">::</span><span class="fu">openMSfile</span>(peaks_file_path)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>msfile_handle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mass Spectrometry file handle.
 Filename:  B022.mzXML 
@@ -372,31 +369,31 @@ Number of scans:  4399 </code></pre>
 <p>mzR uses <a href="https://adv-r.hadley.nz/s3.html" target="_blank">S3</a> object oriented programming which is difficult if you are only used to R’s usual functional programming style. You don’t have to worry much about it because most of what I’ll show is functional, but if you do care there are a number of object based methods you can use.</p>
 <p>We can see how mzR “opened/parsed” the file, here using C++ code from ProteoWizard.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>msfile_handle<span class="sc">@</span>backend</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>msfile_handle<span class="sc">@</span>backend</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>C++ object &lt;0x559801577200&gt; of class 'Pwiz' &lt;0x559801e0f280&gt;</code></pre>
+<pre><code>C++ object &lt;0x55b6cebbf700&gt; of class 'Pwiz' &lt;0x55b6ceced4e0&gt;</code></pre>
 </div>
 </div>
 <p>One of the most useful {mzR} functions is <code>header()</code> which provides summarizing information about each scan in the dataset. Each scan is numbered sequentially (seqNum/acquisitionNum).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">header</span>(msfile_handle)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(summary_data, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">header</span>(msfile_handle)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(summary_data, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["seqNum"],"name":[1],"type":["int"],"align":["right"]},{"label":["acquisitionNum"],"name":[2],"type":["int"],"align":["right"]},{"label":["msLevel"],"name":[3],"type":["int"],"align":["right"]},{"label":["polarity"],"name":[4],"type":["int"],"align":["right"]},{"label":["peaksCount"],"name":[5],"type":["int"],"align":["right"]},{"label":["totIonCurrent"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["retentionTime"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["basePeakMZ"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["basePeakIntensity"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["collisionEnergy"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["ionisationEnergy"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["lowMZ"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["highMZ"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["precursorScanNum"],"name":[14],"type":["int"],"align":["right"]},{"label":["precursorMZ"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["precursorCharge"],"name":[16],"type":["int"],"align":["right"]},{"label":["precursorIntensity"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["mergedScan"],"name":[18],"type":["int"],"align":["right"]},{"label":["mergedResultScanNum"],"name":[19],"type":["int"],"align":["right"]},{"label":["mergedResultStartScanNum"],"name":[20],"type":["int"],"align":["right"]},{"label":["mergedResultEndScanNum"],"name":[21],"type":["int"],"align":["right"]},{"label":["injectionTime"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["filterString"],"name":[23],"type":["chr"],"align":["left"]},{"label":["spectrumId"],"name":[24],"type":["chr"],"align":["left"]},{"label":["centroided"],"name":[25],"type":["lgl"],"align":["right"]},{"label":["ionMobilityDriftTime"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["isolationWindowTargetMZ"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["isolationWindowLowerOffset"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["isolationWindowUpperOffset"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["scanWindowLowerLimit"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["scanWindowUpperLimit"],"name":[31],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1","3":"1","4":"1","5":"320","6":"7179157","7":"0.0673789","8":"217.1074","9":"266403.1","10":"NA","11":"0","12":"150.0266","13":"1892.051","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=1","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"150.0266","31":"1892.051","_rn_":"1"},{"1":"2","2":"2","3":"1","4":"1","5":"673","6":"6511908","7":"0.4336310","8":"301.1406","9":"245597.2","10":"NA","11":"0","12":"150.0265","13":"1980.235","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=2","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"150.0265","31":"1980.235","_rn_":"2"},{"1":"3","2":"3","3":"1","4":"1","5":"617","6":"7172014","7":"0.7546260","8":"217.1071","9":"208030.5","10":"NA","11":"0","12":"150.0265","13":"1954.778","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=3","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"150.0265","31":"1954.778","_rn_":"3"},{"1":"4","2":"4","3":"1","4":"1","5":"652","6":"8089850","7":"1.0220100","8":"301.1406","9":"245887.3","10":"NA","11":"0","12":"150.0265","13":"1958.846","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=4","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"150.0265","31":"1958.846","_rn_":"4"},{"1":"5","2":"5","3":"1","4":"1","5":"565","6":"7538651","7":"1.2895000","8":"301.1407","9":"266377.8","10":"NA","11":"0","12":"150.0265","13":"1985.422","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=5","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"150.0265","31":"1985.422","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["seqNum"],"name":[1],"type":["int"],"align":["right"]},{"label":["acquisitionNum"],"name":[2],"type":["int"],"align":["right"]},{"label":["msLevel"],"name":[3],"type":["int"],"align":["right"]},{"label":["polarity"],"name":[4],"type":["int"],"align":["right"]},{"label":["peaksCount"],"name":[5],"type":["int"],"align":["right"]},{"label":["totIonCurrent"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["retentionTime"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["basePeakMZ"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["basePeakIntensity"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["collisionEnergy"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["ionisationEnergy"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["lowMZ"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["highMZ"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["precursorScanNum"],"name":[14],"type":["int"],"align":["right"]},{"label":["precursorMZ"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["precursorCharge"],"name":[16],"type":["int"],"align":["right"]},{"label":["precursorIntensity"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["mergedScan"],"name":[18],"type":["int"],"align":["right"]},{"label":["mergedResultScanNum"],"name":[19],"type":["int"],"align":["right"]},{"label":["mergedResultStartScanNum"],"name":[20],"type":["int"],"align":["right"]},{"label":["mergedResultEndScanNum"],"name":[21],"type":["int"],"align":["right"]},{"label":["injectionTime"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["filterString"],"name":[23],"type":["chr"],"align":["left"]},{"label":["spectrumId"],"name":[24],"type":["chr"],"align":["left"]},{"label":["centroided"],"name":[25],"type":["lgl"],"align":["right"]},{"label":["ionMobilityDriftTime"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["isolationWindowTargetMZ"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["isolationWindowLowerOffset"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["isolationWindowUpperOffset"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["scanWindowLowerLimit"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["scanWindowUpperLimit"],"name":[31],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1","3":"1","4":"1","5":"320","6":"7179157","7":"0.0673789","8":"217.1074","9":"266403.1","10":"NA","11":"0","12":"150.0266","13":"1892.051","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=1","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","_rn_":"1"},{"1":"2","2":"2","3":"1","4":"1","5":"673","6":"6511908","7":"0.4336310","8":"301.1406","9":"245597.2","10":"NA","11":"0","12":"150.0265","13":"1980.235","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=2","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","_rn_":"2"},{"1":"3","2":"3","3":"1","4":"1","5":"617","6":"7172014","7":"0.7546260","8":"217.1071","9":"208030.5","10":"NA","11":"0","12":"150.0265","13":"1954.778","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=3","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","_rn_":"3"},{"1":"4","2":"4","3":"1","4":"1","5":"652","6":"8089850","7":"1.0220100","8":"301.1406","9":"245887.3","10":"NA","11":"0","12":"150.0265","13":"1958.846","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=4","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","_rn_":"4"},{"1":"5","2":"5","3":"1","4":"1","5":"565","6":"7538651","7":"1.2895000","8":"301.1407","9":"266377.8","10":"NA","11":"0","12":"150.0265","13":"1985.422","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=5","25":"TRUE","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 </div>
 <p>THis allows us to do things like filtering for only positive mode MS<sup>2</sup> scans.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> summary_data[summary_data<span class="sc">$</span>polarity <span class="sc">==</span> <span class="dv">1</span>, ][summary_data<span class="sc">$</span>msLevel <span class="sc">==</span> <span class="dv">2</span>, ]</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered_df, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> summary_data[summary_data<span class="sc">$</span>polarity <span class="sc">==</span> <span class="dv">1</span>, ][summary_data<span class="sc">$</span>msLevel <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered_df, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["seqNum"],"name":[1],"type":["int"],"align":["right"]},{"label":["acquisitionNum"],"name":[2],"type":["int"],"align":["right"]},{"label":["msLevel"],"name":[3],"type":["int"],"align":["right"]},{"label":["polarity"],"name":[4],"type":["int"],"align":["right"]},{"label":["peaksCount"],"name":[5],"type":["int"],"align":["right"]},{"label":["totIonCurrent"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["retentionTime"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["basePeakMZ"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["basePeakIntensity"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["collisionEnergy"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["ionisationEnergy"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["lowMZ"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["highMZ"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["precursorScanNum"],"name":[14],"type":["int"],"align":["right"]},{"label":["precursorMZ"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["precursorCharge"],"name":[16],"type":["int"],"align":["right"]},{"label":["precursorIntensity"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["mergedScan"],"name":[18],"type":["int"],"align":["right"]},{"label":["mergedResultScanNum"],"name":[19],"type":["int"],"align":["right"]},{"label":["mergedResultStartScanNum"],"name":[20],"type":["int"],"align":["right"]},{"label":["mergedResultEndScanNum"],"name":[21],"type":["int"],"align":["right"]},{"label":["injectionTime"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["filterString"],"name":[23],"type":["chr"],"align":["left"]},{"label":["spectrumId"],"name":[24],"type":["chr"],"align":["left"]},{"label":["centroided"],"name":[25],"type":["lgl"],"align":["right"]},{"label":["ionMobilityDriftTime"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["isolationWindowTargetMZ"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["isolationWindowLowerOffset"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["isolationWindowUpperOffset"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["scanWindowLowerLimit"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["scanWindowUpperLimit"],"name":[31],"type":["dbl"],"align":["right"]}],"data":[{"1":"8","2":"8","3":"2","4":"1","5":"49","6":"96117.32","7":"2.14157","8":"301.14122","9":"48492.03","10":"25","11":"0","12":"50.16715","13":"319.0712","14":"7","15":"301.1405","16":"1","17":"411267.5","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=8","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"50.16715","31":"319.0712","_rn_":"8"},{"1":"29","2":"29","3":"2","4":"1","5":"65","6":"287236.06","7":"7.81044","8":"217.10517","9":"163613.17","10":"25","11":"0","12":"50.93454","13":"218.1087","14":"28","15":"217.1069","16":"1","17":"238682.0","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=29","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"50.93454","31":"218.1087","_rn_":"29"},{"1":"41","2":"41","3":"2","4":"1","5":"100","6":"1545867.50","7":"11.12990","8":"113.96369","9":"626562.44","10":"25","11":"0","12":"50.89707","13":"156.1382","14":"40","15":"154.9900","16":"0","17":"89905.9","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=41","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"50.89707","31":"156.1382","_rn_":"41"},{"1":"81","2":"81","3":"2","4":"1","5":"104","6":"475490.09","7":"21.90190","8":"84.95964","9":"102565.70","10":"25","11":"0","12":"51.17863","13":"168.1384","14":"80","15":"167.0125","16":"1","17":"263485.1","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=81","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"51.17863","31":"168.1384","_rn_":"81"},{"1":"84","2":"84","3":"2","4":"1","5":"55","6":"95975.35","7":"22.66680","8":"301.14101","9":"39457.93","10":"25","11":"0","12":"51.32985","13":"322.4011","14":"83","15":"301.1404","16":"1","17":"142265.4","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=84","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"51.32985","31":"322.4011","_rn_":"84"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["seqNum"],"name":[1],"type":["int"],"align":["right"]},{"label":["acquisitionNum"],"name":[2],"type":["int"],"align":["right"]},{"label":["msLevel"],"name":[3],"type":["int"],"align":["right"]},{"label":["polarity"],"name":[4],"type":["int"],"align":["right"]},{"label":["peaksCount"],"name":[5],"type":["int"],"align":["right"]},{"label":["totIonCurrent"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["retentionTime"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["basePeakMZ"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["basePeakIntensity"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["collisionEnergy"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["ionisationEnergy"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["lowMZ"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["highMZ"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["precursorScanNum"],"name":[14],"type":["int"],"align":["right"]},{"label":["precursorMZ"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["precursorCharge"],"name":[16],"type":["int"],"align":["right"]},{"label":["precursorIntensity"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["mergedScan"],"name":[18],"type":["int"],"align":["right"]},{"label":["mergedResultScanNum"],"name":[19],"type":["int"],"align":["right"]},{"label":["mergedResultStartScanNum"],"name":[20],"type":["int"],"align":["right"]},{"label":["mergedResultEndScanNum"],"name":[21],"type":["int"],"align":["right"]},{"label":["injectionTime"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["filterString"],"name":[23],"type":["chr"],"align":["left"]},{"label":["spectrumId"],"name":[24],"type":["chr"],"align":["left"]},{"label":["centroided"],"name":[25],"type":["lgl"],"align":["right"]},{"label":["ionMobilityDriftTime"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["isolationWindowTargetMZ"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["isolationWindowLowerOffset"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["isolationWindowUpperOffset"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["scanWindowLowerLimit"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["scanWindowUpperLimit"],"name":[31],"type":["dbl"],"align":["right"]}],"data":[{"1":"8","2":"8","3":"2","4":"1","5":"49","6":"96117.32","7":"2.14157","8":"301.14122","9":"48492.03","10":"25","11":"0","12":"50.16715","13":"319.0712","14":"7","15":"301.1405","16":"1","17":"411267.5","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=8","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"NA","31":"NA","_rn_":"8"},{"1":"29","2":"29","3":"2","4":"1","5":"65","6":"287236.06","7":"7.81044","8":"217.10517","9":"163613.17","10":"25","11":"0","12":"50.93454","13":"218.1087","14":"28","15":"217.1069","16":"1","17":"238682.0","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=29","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"NA","31":"NA","_rn_":"29"},{"1":"41","2":"41","3":"2","4":"1","5":"100","6":"1545867.50","7":"11.12990","8":"113.96369","9":"626562.44","10":"25","11":"0","12":"50.89707","13":"156.1382","14":"40","15":"154.9900","16":"0","17":"89905.9","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=41","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"NA","31":"NA","_rn_":"41"},{"1":"81","2":"81","3":"2","4":"1","5":"104","6":"475490.09","7":"21.90190","8":"84.95964","9":"102565.70","10":"25","11":"0","12":"51.17863","13":"168.1384","14":"80","15":"167.0125","16":"1","17":"263485.1","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=81","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"NA","31":"NA","_rn_":"81"},{"1":"84","2":"84","3":"2","4":"1","5":"55","6":"95975.35","7":"22.66680","8":"301.14101","9":"39457.93","10":"25","11":"0","12":"51.32985","13":"322.4011","14":"83","15":"301.1404","16":"1","17":"142265.4","18":"NA","19":"NA","20":"NA","21":"NA","22":"0","23":"NA","24":"controllerType=0 controllerNumber=1 scan=84","25":"TRUE","26":"NA","27":"NA","28":"1","29":"1","30":"NA","31":"NA","_rn_":"84"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -404,11 +401,11 @@ Number of scans:  4399 </code></pre>
 <p>The other useful function I’ll bring up in this post retrieves the actual mass spectra. If just provided the file handle it will load every scan in the file as a separate two-column matrix. For each matrix the first column represents m/z and the second column is intensity. If a scan number is provided it will return the two-column matrix for that specific scan.</p>
 <p>Let’s look at the first five lines of the fourth scan/mass spectrum.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note: mzR::peaks() and mzR::spectra() are interchangeable</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>single_spectrum <span class="ot">&lt;-</span> mzR<span class="sc">::</span><span class="fu">peaks</span>(msfile_handle, <span class="at">scans=</span><span class="dv">4</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(single_spectrum, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note: mzR::peaks() and mzR::spectra() are interchangeable</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>single_spectrum <span class="ot">&lt;-</span> mzR<span class="sc">::</span><span class="fu">peaks</span>(msfile_handle, <span class="at">scans=</span><span class="dv">4</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(single_spectrum, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           mz intensity
+<pre><code>         [,1]      [,2]
 [1,] 150.0265 32913.336
 [2,] 151.0238  2110.815
 [3,] 151.0272  3636.793
@@ -422,14 +419,14 @@ Number of scans:  4399 </code></pre>
 <p>Whenever you get new data the first thing you should do is get a feel for the data and confirm any assumptions that could influence your analysis. Some, but not all of the ways you can do so are shown here.</p>
 <p>We can use <code>mzR::openMSfile()</code> to open the file in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>full_spectra_handle <span class="ot">&lt;-</span> mzR<span class="sc">::</span><span class="fu">openMSfile</span>(raw_mzml_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>full_spectra_handle <span class="ot">&lt;-</span> mzR<span class="sc">::</span><span class="fu">openMSfile</span>(raw_mzml_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using the <code>header()</code> function we can peak at the first 10 rows of the summary information about each spectrum in the file. This is not reading any spectra data yet but pulling metadata about each spectrum that is stored within the mzML file, as described in <a href="../2_mzml/#where-are-the-spectra" target="_blank">post 2</a>. We can see there is both MS<sup>1</sup> and MS<sup>2</sup> spectra i this file.</p>
 <section id="are-the-number-of-data-points-for-the-ms1-and-ms2-spectra-within-the-range-i-expected-peakscount-column" class="level3">
 <h3 class="anchored" data-anchor-id="are-the-number-of-data-points-for-the-ms1-and-ms2-spectra-within-the-range-i-expected-peakscount-column">Are the number of data points for the MS<sup>1</sup> and MS<sup>2</sup> spectra within the range I expected? (<code>peaksCount</code> column)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>header_table <span class="ot">&lt;-</span> <span class="fu">header</span>(full_spectra_handle)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(header_table, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>header_table <span class="ot">&lt;-</span> <span class="fu">header</span>(full_spectra_handle)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(header_table, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -443,7 +440,7 @@ Number of scans:  4399 </code></pre>
 <h3 class="anchored" data-anchor-id="is-this-centroid-or-profile-data">Is this centroid or profile data?</h3>
 <p>All the values in <code>header_table$centroided</code> are false so all the scans in the file are profile. This aligns with the large numbers seen in the <code>peaksCount</code> column above.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(header_table<span class="sc">$</span>centroided)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(header_table<span class="sc">$</span>centroided)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE 
@@ -454,7 +451,7 @@ FALSE
 <section id="what-max-intensities-can-i-expect" class="level3">
 <h3 class="anchored" data-anchor-id="what-max-intensities-can-i-expect">What max intensities can I expect?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(header_table<span class="sc">$</span>totIonCurrent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(header_table<span class="sc">$</span>totIonCurrent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
     12168   1841128  10199948  14827967  19327535 341675010 </code></pre>
@@ -464,11 +461,11 @@ FALSE
 <section id="what-are-the-minmax-retention-times" class="level3">
 <h3 class="anchored" data-anchor-id="what-are-the-minmax-retention-times">What are the min/max retention times?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Minimum retention time: "</span>, <span class="fu">min</span>(header_table<span class="sc">$</span>retentionTime), <span class="st">" s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Minimum retention time: "</span>, <span class="fu">min</span>(header_table<span class="sc">$</span>retentionTime), <span class="st">" s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Minimum retention time: 0.06737892 s"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Maximum retention time: "</span>, <span class="fu">max</span>(header_table<span class="sc">$</span>retentionTime) , <span class="st">" s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Maximum retention time: "</span>, <span class="fu">max</span>(header_table<span class="sc">$</span>retentionTime) , <span class="st">" s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Maximum retention time: 1200.10806 s"</code></pre>
 </div>
@@ -478,7 +475,7 @@ FALSE
 <h3 class="anchored" data-anchor-id="does-the-data-contain-positive-or-negative-mode-spectra-both">Does the data contain positive or negative mode spectra? Both?</h3>
 <p>Here it’s positive because the only value within the <code>polarity</code> column is <code>1</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(header_table<span class="sc">$</span>polarity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(header_table<span class="sc">$</span>polarity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    1 
@@ -489,7 +486,7 @@ FALSE
 <section id="how-many-ms1-ms2-scans-are-there" class="level3">
 <h3 class="anchored" data-anchor-id="how-many-ms1-ms2-scans-are-there">How many MS<sup>1</sup> MS<sup>2</sup> scans are there?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(header_table<span class="sc">$</span>msLevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(header_table<span class="sc">$</span>msLevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    1    2 

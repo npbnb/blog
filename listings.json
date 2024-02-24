@@ -2,9 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/intro_to_mass_spec/2_mzml/index.html",
-      "/posts/intro_to_mass_spec/3_spectra/index.html",
       "/posts/intro_to_mass_spec/4_reanalysis/index.html",
+      "/posts/intro_to_mass_spec/3_spectra/index.html",
+      "/posts/intro_to_mass_spec/2_mzml/index.html",
       "/posts/intro_to_mass_spec/1_intro/index.html",
       "/posts/template_post/index.html"
     ]
