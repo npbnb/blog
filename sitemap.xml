@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://code4np.github.io/contributors/chase/chase.html</loc>
-    <lastmod>2024-01-25T21:56:25.683Z</lastmod>
+    <loc>https://code4np.github.io/posts/intro_to_mass_spec/1_intro/index.html</loc>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://code4np.github.io/posts/intro_to_mass_spec/4_reanalysis/index.html</loc>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/posts/template_post/index.html</loc>
-    <lastmod>2024-01-25T21:56:25.683Z</lastmod>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://code4np.github.io/contributors/chase/chase.html</loc>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/index.html</loc>
-    <lastmod>2024-01-25T21:56:25.683Z</lastmod>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/about/about.html</loc>
-    <lastmod>2024-01-25T21:56:25.683Z</lastmod>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/contributors/joe/joe.html</loc>
-    <lastmod>2024-01-25T21:56:25.683Z</lastmod>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://code4np.github.io/posts/intro_to_mass_spec/3_spectra/index.html</loc>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://code4np.github.io/posts/intro_to_mass_spec/2_mzml/index.html</loc>
+    <lastmod>2024-02-24T19:16:02.287Z</lastmod>
   </url>
 </urlset>
