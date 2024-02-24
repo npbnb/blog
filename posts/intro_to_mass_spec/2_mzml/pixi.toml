@@ -1,0 +1,11 @@
+[project]
+name = "post"
+version = "0.1.0"
+description = "Add a short description here"
+channels = ["conda-forge", "bioconda", "anaconda"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[tasks]
+
+[dependencies]
+quarto = "==1.4.550"

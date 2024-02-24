@@ -33,7 +33,8 @@ format:
   html:
     theme: cosmo
     css: styles.css
-    page-layout: full
-
-
-
+    grid:
+      sidebar-width: 300px
+      body-width: 1000px
+      margin-width: 300px
+      gutter-width: 1.5rem
