@@ -88,20 +88,14 @@ options(timeout=240)
 temporary_directory <- tempdir()
 
 # 22.3 MB
-#peaks_file_path <- file.path(temporary_directory, "B022.mzXML" )
-#download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/peak/B022.mzXML",
-#              destfile = peaks_file_path)
-#              
-peaks_file_path <- "/home/chase/Downloads/biggy/B022.mzXML"
-
-
+peaks_file_path <- file.path(temporary_directory, "B022.mzXML" )
+download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/peak/B022.mzXML",
+             destfile = peaks_file_path)
 
 # 306.1 MB
-# raw_mzml_path <- file.path(temporary_directory, "B022.mzML" )
-# download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/raw/FullSpectra-mzML/B022_GenbankAccession-KY858245.mzML",
-#               destfile = raw_mzml_path)
-
-raw_mzml_path <- "/home/chase/Downloads/biggy/B022.mzML"
+raw_mzml_path <- file.path(temporary_directory, "B022.mzML" )
+download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/raw/FullSpectra-mzML/B022_GenbankAccession-KY858245.mzML",
+              destfile = raw_mzml_path)
 ```
 
 
