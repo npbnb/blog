@@ -1,0 +1,62 @@
+---
+title: "Hello!"
+author:
+  - name: 
+      given: Chase
+      family: Clark
+      non-dropping-particle: M
+    roles: [original draft, review & editing]
+    url: https://chasemc.github.io
+    affiliation: University of Wisconsin-Madison
+    orcid: 0000-0001-6439-9397
+categories: []
+date: "2023-12-30"
+description: "Information about how this blog works and general info"
+draft: false
+appendix-cite-as: display
+funding: "The author(s) received no specific funding for this work."
+citation: true
+format:
+  html:
+    df-print: paged
+    template-partials:
+    - title-metadata.html
+---
+
+
+
+```python
+import pickle
+from itertools import combinations
+from rdkit.Chem import rdFMCS
+import math
+import csv
+from rich.progress import Progress
+import sys
+from pathlib import Path
+import gzip
+
+inpath = Path(sys.argv[1])
+
+with gzip.open(inpath, "rb") as f:
+    zz = pickle.load(f)
+    
+def calculate_similarity(x):
+    a=x[0]
+    b=x[1]
+    res = rdFMCS.FindMCS((a.mol, b.mol),  timeout=5, ringMatchesRingOnly = True, completeRingsOnly = True)
+    mcs_tani = res.numAtoms / (a.mol.GetNumAtoms() + b.mol.GetNumAtoms() - res.numAtoms)
+    if mcs_tani > 0.3:
+        return((a.inchi, b.inchi, math.ceil(mcs_tani * 100)))
+    
+
+outpath = inpath.with_suffix(".tsv.gz")    
+
+with gzip.open(outpath, "wt") as f:
+    with Progress(transient=True) as pg:
+        task = pg.add_task("Processing", total=len(zz)) 
+        for i in zz:
+            if ii := calculate_similarity(i):
+                csv.writer(f, delimiter="\t").writerow(ii)
+            pg.update(task, advance=1)
+```
