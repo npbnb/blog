@@ -24,21 +24,25 @@ build_docker_dev:
 	
 ## render :	Render a post (e.g. make render posts/example_post_3_jupyter/index.ipynb)
 render: build_docker_dev
+	docker build -t code4np-$$(basename $$(dirname $(filter-out $@,$(MAKECMDGOALS)))) $(dir $(filter-out $@,$(MAKECMDGOALS)))
+	# use the tagged image just built
 	docker run -it \
 		-v ${PWD}:/home/code4np \
-		$$(docker build -q ${PWD}/$$(dirname $(filter-out $@,$(MAKECMDGOALS)))) \
-		/bin/bash -c 'pixi run quarto render  /home/code4np/$(filter-out $@,$(MAKECMDGOALS))'
-	
+		-u $$(id -u):$$(id -g) \
+		code4np-$$(basename $$(dirname $(filter-out $@,$(MAKECMDGOALS)))) \
+		/bin/bash -c 'pixi run quarto render /home/code4np/$(filter-out $@,$(MAKECMDGOALS))'	
+
 ## render_all_posts :	Render all posts 
 render_all_posts: build_docker_dev
-	for i in $$(find posts -name "index.ipynb" -o -name "index.qmd"); do \
-		echo "Rendering file: $${i}" && \
-		docker run -it \
-			-v ${PWD}:/home/code4np \
-			-u $$(id -u):$$(id -g) \
-			$$(docker build ${PWD}/$$(dirname $$i)) \
-			/bin/bash -c 'pixi run quarto render /home/code4np/$$i'; \
-	done
+		for i in $$(find posts -name "index.ipynb" -o -name "index.qmd"); do \
+			echo "Rendering file: $$(basename $$(dirname $${i}))" && \
+			docker build -t code4np-$$(basename $$(dirname $${i})) $$(dirname $${i}) && \
+			docker run -it \
+				-u $$(id -u):$$(id -g) \
+				-v ${PWD}:/home/code4np \
+				code4np-$$(basename $$(dirname $${i})) \
+				/bin/bash -c 'pixi run quarto render /home/code4np/$${i}' ; \
+		done
 
 ## render_site :	Render the site
 render_site: build_docker_dev

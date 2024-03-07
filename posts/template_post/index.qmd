@@ -16,11 +16,6 @@ draft: true
 appendix-cite-as: display
 funding: "The author(s) received no specific funding for this work."
 citation: true
-format:
-  html:
-    df-print: paged
-    template-partials:
-    - title-metadata.html
 ---
 
 
