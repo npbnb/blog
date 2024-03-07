@@ -48,7 +48,7 @@ There are a number of ionizers that are in use in modern mass spectrometers, wit
 
 ### Detector
 
-While there are different detectors, this isn't usually a concern during modern analyses. However, if you notice things like sensitivity being too high or low it could be good feedback to give to the instrument operator as it could be detector settings (though likely sample concentration or ionization efficiency). 
+While there are different detectors, this isn't usually a concern during modern analyses. However, if you notice things like sensitivity being too high or low it could be good feedback to give to the instrument operator as it could be detector settings (though llikely sample concentration or ionization efficiency). 
 
 Another thing to note is that some instruments may have more than one detector and they may serve different purposes. For example, some Time-Of-Flight (TOF) instruments have both a "linear" detector and a "reflectron" detector that elongates the flight path allowing higher resolving power but lower m/z ceiling than the "linear" detector. {{< video https://youtu.be/0jeFpXHZ8W0 start="47" width="250" height="175" >}}
 
@@ -59,14 +59,14 @@ Another thing to note is that some instruments may have more than one detector a
 
 Unfortunately different instrument vendors, and even different instruments from the same vendor, have their own unique data storage format. This is for a variety of good and bad reasons, the most convincing to me being that instruments with ever-increasing acquisition speeds and ever-increasing data size need faster/better software/hardware strategies to store data, which can provide a competitive advantage.
 
-Raw data is likely to come with file extensions (`.wiff`, `.d`, `.raw/.RAW`, `.lcd`, etc.) and some are locked in so that only the instrument vendor's software can read the data.
+Raw data is llikely to come with file extensions (`.wiff`, `.d`, `.raw/.RAW`, `.lcd`, etc.) and some are locked in so that only the instrument vendor's software can read the data.
 
 
 ## Open-source data formats
 
 Fortunately there are widely used, open, standard formats available. You will proabably encounter `mzXML` and/or its newer version, `mzML`; so, go with `mzML` if you have the option. mzXML files have the file extension `mzXML` and `mzML` files have the file extension `.mzXML` and `.mzML`.
 
-Some vendor software allows converting a file in proprietary data format to mzML, otherwise your best bet is likely the program `msconvert` available as part of the [ProteoWizard](https://proteowizard.sourceforge.io/download.html) software library. Unfortunately some vendor formats can only be converted on a Windows computer, a limitation of vendors only providing Windows-based [DLLs](https://learn.microsoft.com/en-us/troubleshoot/windows-client/deployment/dynamic-link-library) (i.e. don't complain to the ProteoWizard team about this).
+Some vendor software allows converting a file in proprietary data format to mzML, otherwise your best bet is llikely the program `msconvert` available as part of the [ProteoWizard](https://proteowizard.sourceforge.io/download.html) software library. Unfortunately some vendor formats can only be converted on a Windows computer, a limitation of vendors only providing Windows-based [DLLs](https://learn.microsoft.com/en-us/troubleshoot/windows-client/deployment/dynamic-link-library) (i.e. don't complain to the ProteoWizard team about this).
 
 `msconvert` can be used from both its GUI or at the [command line](https://proteowizard.sourceforge.io/tools/msconvert.html)
 
