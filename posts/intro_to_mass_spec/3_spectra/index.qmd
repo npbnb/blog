@@ -16,6 +16,8 @@ filters:
   - collapse-callout
 collapse-callout:
   all: true  
+execute:
+  freeze: true
 ---
 
 This is a continuation from [Part 2](../2_mzml/).
