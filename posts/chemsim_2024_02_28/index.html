@@ -256,7 +256,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>I recently reworked a portion of the <a href="https://socialgene.github.io/" target="_blank">SocialGene</a> codebase to allow for easier addons/plugins. Inevitably, this also meant I needed to write additional code to accommodate chemistry into software that had primarily been genomics oriented. I won’t go into details here but chemicals from any source (e.g.&nbsp;NPAtlas, GNPS standards, etc.) are linked to a standardized notion of a molecule (i.e.&nbsp;the same molecule from two sources will link to a single “chemical” node). But I also wanted chemical similarity to be incorporated. After incorporating some basic chemical similarity measures I realized that some molecules I wanted to see be linked as “similar” weren’t and that led down a rabbit hole of similarity measures. Long story short, there’s going to be two, Tanimoto and a semi-custom MCS similarity (at the bottom of this post). However, they second takes a long time to compute, so I decided to pump out this quick, very introductory post on calculating chemical similarity.</p>
+<p>I recently reworked a portion of the <a href="https://socialgene.github.io/" target="_blank">SocialGene</a> codebase to allow for easier addons/plugins. Inevitably, this also meant I needed to write additional code to accommodate chemistry into software that had primarily been genomics oriented. I won’t go into details here but chemicals from any source (e.g.&nbsp;NPAtlas, GNPS standards, etc.) are linked to a standardized notion of a molecule (i.e.&nbsp;the same molecule from two sources will link to a single “chemical” node). But I also wanted chemical similarity to be incorporated. After incorporating some basic chemical similarity measures I realized that some of the molecules I wanted to see linked as “similar” weren’t and that led me down a rabbit hole of similarity measures. Long story short, there’s might need to be at least two, Tanimoto and a semi-custom MCS similarity measure (at the bottom of this post). However, the second takes a long time to compute, so I decided to pump out this quick, very introductory post on calculating chemical similarity.</p>
 </section>
 <section id="vectors" class="level1">
 <h1>Vectors</h1>
@@ -269,7 +269,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>inchi_string<span class="op">=</span><span class="st">"InChI=1S/C37H67NO13/c1-14-25-37(10,45)30(41)20(4)27(39)18(2)16-35(8,44)32(51-34-28(40)24(38(11)12)15-19(3)47-34)21(5)29(22(6)33(43)49-25)50-26-17-36(9,46-13)31(42)23(7)48-26/h18-26,28-32,34,40-42,44-45H,14-17H2,1-13H3/t18-,19-,20+,21+,22-,23+,24+,25-,26+,28-,29+,30-,31+,32-,34+,35-,36-,37-/m1/s1"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mol1 <span class="op">=</span> Chem.MolFromInchi(inchi_string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Check to see if we now have an RDKit molecule object.</p>
+<p>Let’s check to see if we now have an RDKit molecule object.</p>
 <div id="cell-7" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>inspect(mol1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -285,7 +285,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 </pre>
 </div>
 </div>
-<p>Since this is being written in Jupyter notebook, just declaring the molecule variable alone will generate a 2-D drawing of the molecule.</p>
+<p>Since this is being written in a Jupyter notebook, just declaring the molecule variable alone will generate a 2-D drawing of the molecule.</p>
 <div id="cell-9" class="cell" data-execution_count="96">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mol1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="96">
@@ -296,7 +296,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>A lot (most?) methods to calculate chemical similarity don’t work on the molecule itself, but a vector representation of the molecule (“vector” = a 1-dimensional set of numbers (e.g.&nbsp;[1,2,3,4,5])). The length of the vector and the means by which numbers are assigned vary, but a common method is the “Morgan fingerprint”.</p>
+<p>A lot (most?) methods to calculate chemical similarity don’t work on the molecule itself, but a vector representation of the molecule (“vector” = a 1-dimensional list of numbers (e.g.&nbsp;[1,2,3,4,5])). The length of the vector and the means by which numbers are assigned vary, but a common method is what’s called a “Morgan fingerprint”.</p>
 <p>The figure below is from <code>Caichao Ye, Xinyue Zhang, Genwang Wei et al. Data-based Polymer-Unit Fingerprint (PUFp): A Newly Accessible Expression of Polymer Organic Semiconductors for Machine Learning, 20 July 2022, https://doi.org/10.21203/rs.3.rs-1813671/v1</code> and depicts several methods for creating these vectors (the chained boxes, where each square is a number in the vector, also called a “bit”)</p>
 <div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -323,21 +323,21 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 <pre><code>'00000000000000000000000000000000000000000100000000000000000000000010000000000000000000000000000000000000000010000000000000010000000000010000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000010000000000000000000000000001000000000000000000000000000000000000010000000000000000000000000000000010000010000000000000101000000000000000000000000000000000000100000000000000000000000010000000000000000000001000000000000001000000000000000000000000000001000000000000000000010000100000000000000000000000000000001000000000000000000000000000000000000000000000000000001000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000010000000000000000000000000010000000000000000000000000000000000000100000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000100000000000000000000000000000000010000000000000000000010000000000001001000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000010000000110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000010000000000000000000000100000000000000000000000000000000000000000000000100000001000000000000000000000000000100000010000000000000001000000100000000000000000000010000000000000000000000000000000000000000000000000000000000000000000001000000001000000000000000001000000000000000000000000000000000000000000000000000000000001010000000000000100000000000010000000000000000001000010000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000101000000000000000000000000000000000100000000000000010000000000000000000000000000000000000000010000000000100000000000000100000000000000000000010010000000000000000000000000000000000000000010000001100000000000000000000000000000000000'</code></pre>
 </div>
 </div>
-<p>The vector should have 2048 numbers</p>
+<p>The vector should contain 2048 numbers.</p>
 <div id="cell-18" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mol1_morgan_fingerprint.GetNumBits()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <pre><code>2084</code></pre>
 </div>
 </div>
-<p>How many 1’s</p>
+<p>How many 1’s are in the vector?</p>
 <div id="cell-20" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mol1_morgan_fingerprint.GetNumOnBits()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
 <pre><code>72</code></pre>
 </div>
 </div>
-<p>How many 0’s</p>
+<p>How many 0’s are in the vector?</p>
 <div id="cell-22" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mol1_morgan_fingerprint.GetNumOffBits()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="61">
@@ -347,7 +347,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 <section id="calculate-similarity" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-similarity">Calculate similarity</h2>
 <p>Just like with fingerprint/vector generation, there are a lot of different methods to measure similarity between chemical vectors. For simplicity I’m just going to use RDKit’s Tanimoto score.</p>
-<p>And, obviously, if we calculate the similarity between the same vector we should get the best score possible which, for Tanimoto, is 1.</p>
+<p>And, obviously, if we calculate the similarity between the same vector we should get the best score possible which, for Tanimoto, is 1. (Tanimoto scores range between 0 and 1)</p>
 <div id="cell-26" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>DataStructs.TanimotoSimilarity(mol1_morgan_fingerprint, mol1_morgan_fingerprint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
@@ -358,16 +358,17 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 </section>
 <section id="beyond-tanimoto" class="level1">
 <h1>Beyond Tanimoto</h1>
-<p>There’s pros and cons to both vector and similarity method choices. Tanimoto similarity isn’t always great. Two molecules I’ve been using to test things on the genetics side of Socialgene are Diazaquinomycin A and Nybomycin.</p>
-<div id="cell-29" class="cell" data-execution_count="63">
+<p>There’s pros and cons to both vector and similarity method choices. As an example, two molecules I’ve been using to test things on the genetics side of Socialgene are Diazaquinomycin A and Nybomycin.</p>
+<p>We can load the chemical structures for these into Python by using RDKit to parse InCHI strings that represent each molecule. I pulled the below InCHI strings from <a href="https://pubchem.ncbi.nlm.nih.gov" target="_blank">https://pubchem.ncbi.nlm.nih.gov</a></p>
+<div id="cell-30" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>diazaquinomycin_a_inchi <span class="op">=</span> <span class="st">"InChI=1S/C20H22N2O4/c1-5-7-11-9(3)19(25)21-15-13(11)17(23)14-12(8-6-2)10(4)20(26)22-16(14)18(15)24/h5-8H2,1-4H3,(H,21,25)(H,22,26)"</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>nybomycin_inchi <span class="op">=</span> <span class="st">"InChI=1S/C16H14N2O4/c1-8-3-13(21)18-7-22-16-14-11(5-10(8)15(16)18)9(6-19)4-12(20)17(14)2/h3-5,19H,6-7H2,1-2H3"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-30" class="cell" data-execution_count="64">
+<div id="cell-31" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>diazaquinomycin_a_mol <span class="op">=</span> Chem.MolFromInchi(diazaquinomycin_a_inchi)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>nybomycin__mol <span class="op">=</span> Chem.MolFromInchi(nybomycin_inchi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-31" class="cell" data-execution_count="65">
+<div id="cell-32" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Draw.MolsToGridImage([diazaquinomycin_a_mol, nybomycin__mol])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="65">
 <div>
@@ -377,24 +378,24 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<div id="cell-32" class="cell" data-execution_count="66">
+<div id="cell-33" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> morgan_fingerprint(rdkitmol, radius<span class="op">=</span><span class="dv">2</span>, nBits<span class="op">=</span><span class="dv">1024</span>):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AllChem.GetMorganFingerprintAsBitVect(</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                rdkitmol, useChirality<span class="op">=</span><span class="va">True</span>, radius<span class="op">=</span>radius, nBits<span class="op">=</span>nBits, bitInfo<span class="op">=</span>{}</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-33" class="cell" data-execution_count="67">
+<div id="cell-34" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>diazaquinomycin_a_morgan_fingerprint <span class="op">=</span> morgan_fingerprint(diazaquinomycin_a_mol)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>nybomycin_morgan_fingerprint <span class="op">=</span> morgan_fingerprint(nybomycin__mol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>These two molecules, show Tanimoto/Dice similarities of 0.12 and 0.22. But, while definitely different, they share common biosynthetic and structural elements and I wanted a score that could supplement other general scores to highlight that they share a decent portion of their scaffold.</p>
-<div id="cell-35" class="cell" data-execution_count="68">
+<div id="cell-36" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>DataStructs.TanimotoSimilarity(diazaquinomycin_a_morgan_fingerprint, nybomycin_morgan_fingerprint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="68">
 <pre><code>0.12903225806451613</code></pre>
 </div>
 </div>
-<div id="cell-36" class="cell" data-execution_count="69">
+<div id="cell-37" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>DataStructs.DiceSimilarity(diazaquinomycin_a_morgan_fingerprint, nybomycin_morgan_fingerprint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="69">
 <pre><code>0.22857142857142856</code></pre>
@@ -404,7 +405,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 <section id="maximum-common-substructure-mcs-similarity" class="level1">
 <h1>Maximum Common Substructure (MCS) similarity</h1>
 <p>The code in the next block uses RDKit to find the maximum common substructure between the two molecules. I highly recommend <a href="https://projects.volkamerlab.org/teachopencadd/talktorials/T006_compound_maximum_common_substructures.html" target="_blank">teachopencadd</a> for a good explainer on MCS as well as other tutorials on computational chemistry.</p>
-<div id="cell-39" class="cell" data-execution_count="70">
+<div id="cell-40" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>molecules <span class="op">=</span> [diazaquinomycin_a_mol, nybomycin__mol]</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>mcs_result <span class="op">=</span> rdFMCS.FindMCS(molecules, ringMatchesRingOnly <span class="op">=</span> <span class="va">True</span>, completeRingsOnly<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>mcs_smarts <span class="op">=</span> mcs_result.smartsString</span>
@@ -414,7 +415,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> [<span class="st">""</span>] <span class="op">+</span> [mol.GetSubstructMatch(mcs_mol) <span class="cf">for</span> mol <span class="kw">in</span> molecules]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Visually it looks like MCS is picking up on the structural similarities I wanted it to…</p>
-<div id="cell-41" class="cell preview-image" data-execution_count="71">
+<div id="cell-42" class="cell preview-image" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>drawing <span class="op">=</span> Draw.MolsToGridImage(smarts_and_mols, highlightAtomLists<span class="op">=</span>matches, legends<span class="op">=</span>legends)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>drawing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="71">
@@ -426,21 +427,21 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 </div>
 </div>
 <p>And we can calculate the Tanimoto similarity formula as applied to the shared vs unshared atoms of the two molecules and their maximum common substructure.</p>
-<div id="cell-43" class="cell" data-execution_count="78">
+<div id="cell-44" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mcs_result.numAtoms <span class="op">/</span> (diazaquinomycin_a_mol.GetNumAtoms() <span class="op">+</span> nybomycin__mol.GetNumAtoms() <span class="op">-</span> mcs_result.numAtoms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="78">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<p>Wrapping that into a single Pyhon function:</p>
-<div id="cell-45" class="cell" data-execution_count="93">
+<p>Wrapping that into a single Python function:</p>
+<div id="cell-46" class="cell" data-execution_count="93">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mcs_similarity(mol1, mol2, threshold<span class="op">=</span><span class="fl">0.3</span>):</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> rdFMCS.FindMCS((mol1, mol2),  timeout<span class="op">=</span><span class="dv">5</span>, ringMatchesRingOnly <span class="op">=</span> <span class="va">True</span>, completeRingsOnly<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    mcs_tani <span class="op">=</span> res.numAtoms <span class="op">/</span> (mol1.GetNumAtoms() <span class="op">+</span> mol2.GetNumAtoms() <span class="op">-</span> res.numAtoms)</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mcs_tani <span class="op">&gt;=</span> threshold:</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> mcs_tani</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-46" class="cell" data-execution_count="94">
+<div id="cell-47" class="cell" data-execution_count="94">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mcs_similarity(diazaquinomycin_a_mol, nybomycin__mol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="94">
 <pre><code>0.5</code></pre>
@@ -448,7 +449,7 @@ gtag('config', 'G-R3J5ZWX2XP', { 'anonymize_ip': true});
 </div>
 <section id="caveat" class="level2">
 <h2 class="anchored" data-anchor-id="caveat">Caveat</h2>
-<p>As of writing this post, NPatlas contains ~30,000 molecules. Using RDKit’s “bulk” versions of calculating Tanimoto similarity, an all-vs-all similarity takes a few minutes running in parallel on a 12-core processor (24 logical cores). However, MCS is a <strong>lot</strong> slower of a calculation. To calculate this MCS similarity on NPatlas required substantial time on CHTC, UW-Madison’s Center for High Throughput Computing. Enough time for me to write this post, and more.</p>
+<p>As of writing this post, NPAtlas contains ~30,000 molecules. Using RDKit’s “bulk” versions of calculating Tanimoto similarity, an all-vs-all similarity takes a few minutes, running in parallel on a 12-core processor (24 logical cores). However, MCS is a <strong>lot</strong> slower of a calculation. To calculate this MCS similarity on NPatlas required substantial time on CHTC, UW-Madison’s Center for High Throughput Computing. Enough time for me to write this post, and more. MCS has a number of settings and it’s not clear yet if the ones I have chosen are adequate or best for what I was hoping to achieve.</p>
 
 
 </section>
