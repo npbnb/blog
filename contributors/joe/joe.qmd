@@ -12,7 +12,7 @@ about:
       href: https://www.linkedin.com/in/joseph-m-egan
     - icon: github
       text: Github
-      href: https://github.com/npbnb
+      href: https://github.com/Jmegan042
 
 ---
 ## Posts by Joe:
@@ -39,7 +39,7 @@ B.S. Biochemistry | 2009-2015
 
 **Ometa Labs LLC** | Director of Product | 2021 - present
 
-**Data Revenue GmbH** | Mass Spectrometry Metabolomics Engineer and Science Writer | 2021-2022
+**Data Revenue GmbH** | Mass Spectrometry Metabolomics Scientist and Science Writer | 2021-2022
 
 
 ---
