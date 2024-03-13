@@ -1,0 +1,210 @@
+---
+title: "Part 3: Reading mzXML/mzML into R"
+author:
+  - name: Chase M Clark
+    orcid: 0000-0001-6439-9397
+    roles: [original draft, review & editing]
+categories: [beginner, mass spectrometry, r]
+date: "2024-02-03"
+description: "An introduction to working with mass spectrometry data in R"
+execute: 
+  cache: true
+  freeze: true
+format:
+  html:
+    df-print: paged
+filters:
+  - collapse-callout
+collapse-callout:
+  all: true  
+---
+
+This is a continuation from [Part 2](../2_mzml/).
+
+# Introduction
+
+In this post we will go through some simple analysis of LC-MS/MS data as that is one of the more common methods used in our field and the concepts are largely transferable to other types of MS data. 
+
+The point of this post is less about teaching R or certain packages (we may do deep-dives using other languages and packages in the future) and more about exposing readers to concepts and how to think about the underlying data.
+
+
+# The Data
+
+We will use some data I acquired previously to make things easier... on me. 
+
+It's from an LC-MS/MS run of a [single *Micromonospora*](https://www.ncbi.nlm.nih.gov/nuccore/1172004435) extract, in a [previously published study](https://doi.org/10.1073/pnas.1801247115).
+
+::: {.callout-tip title="Experimental info" collapse=true}
+The sample is a *Micromonospora* extract. The extraction was performed from a bacterial culture growing on solid A1 agar media following the protocol of Bligh,E. G. and Dyer, W. J. (9). Agar cultures were divided into 1 cm^3^ pieces and 3 mm glass beads
+were added. Extraction solvent was added in three steps with vigorous vortexing between steps 1) 1:2 (v/v) CHCl3:MeOH, 2) CHCl3 in 1/3 the added volume of step one, 3) H2O in 1/3 the added volume of step one. From the resulting two-layer liquid partition, the organic layer was retained for further analysis.
+
+The extract was analyzed via LC-MS/MS with a method adapted from that described by [Goering et al](https://doi.org/10.1021/acscentsci.5b00331). Experiments were performed on an Agilent 1200 workstation connected to a Thermo Fisher Scientific Q-Exactive mass spectrometer with an electrospray ionization source. Reversed-phase chromatography was performed by injection of 20 μL of 0.1 mg/mL of extract at a 0.3 mL/min flow rate across a Phenomenex Kinetex C18 RPLC column (150 mm x 2.1 mm i.d., 2 μm particle size). Mobile phase A was water with 0.1% formic acid and mobile phase B was acetonitrile with 0.1% formic acid. Mobile phase B was held at 15% for 1 minute, then adjusted to 95% over 12 minutes, where it was held for 2 minutes, and the system re-equilibrated for 5 minutes. The mass spectrometry parameters were as follows: scan range 200-2000 m/z, resolution 35,000, scan rate ~3.7 per second. Data were gathered in profile and the top 5 most intense peaks in each full spectrum were targeted for fragmentation that employed a collision energy setting of 25 eV for Higher-energy Collisional Dissociation (HCD) and isolation window of 2.0 *m/z*.
+
+The mzXML file was created with ProteoWizard's msconvert, using default settings.
+:::
+
+# Code (Basics)
+
+## Set Up an 🇷 session
+
+The rest of this tutorial will take place [using R](https://bookdown.org/introrbook/intro2r/installing-r-and-rstudio.html#installing-rstudio). 
+
+Here we will install and then load [mzR](https://bioconductor.org/packages/release/bioc/html/mzR.html), a Bioconductor package for parsing mass spectrometry data. Vignette [here](https://bioconductor.org/packages/release/bioc/vignettes/mzR/inst/doc/mzR.html). For plotting we'll be using ggplot2 and plotly.
+
+```{r include:false}
+if (!require("mzR", quietly = TRUE)){
+  if (!require("BiocManager", quietly = TRUE)){
+      install.packages("BiocManager")
+  }
+  BiocManager::install("mzR")
+}
+  
+library(mzR)
+```
+
+## Download LC-MS/MS example data
+
+Next let's download the LC-MS/MS data we will be working with to a temporary directory (i.e. the directory will be deleted upon closing the R session). 
+
+There are two files: 
+
+- an mzXML file which contains **centroid** data (peaks only)
+- an mzML file which contains **profile** data (raw data,not peak-picked)
+
+[GNPS](https://gnps.ucsd.edu/ProteoSAFe/static/gnps-splash.jsp) used to require mzXML so that's the reason for both mzXML and mzML formats.
+
+
+Warning: This is a 22 MB and 306 MB download.
+```{r}
+# I have slow internet so I'll increase the amount of time the download is allowed to take
+options(timeout=240)
+
+temporary_directory <- tempdir()
+
+# 22.3 MB
+peaks_file_path <- file.path(temporary_directory, "B022.mzXML" )
+download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/peak/B022.mzXML",
+             destfile = peaks_file_path)
+             
+# 306.1 MB
+raw_mzml_path <- file.path(temporary_directory, "B022.mzML" )
+download.file(url = "ftp://massive.ucsd.edu/v01/MSV000081555/raw/FullSpectra-mzML/B022_GenbankAccession-KY858245.mzML",
+              destfile = raw_mzml_path)
+
+```
+
+
+## How to open mzXML/mzML data in R
+
+If we look at the first ten lines of:
+```{r}
+peaks_file_path
+```
+
+We can see it is indeed an mzXML file:
+```{r}
+cat(readLines(peaks_file_path, n=10), sep = "\n")
+```
+
+I'm a fan of mzR due to its speed (under the hood is a lot of fast C++ code), and that it lazily loads the data from mzXML/mzML files (it doesn't read everything into memory unless you request it).
+
+Here we will tell mzR to lazily open the mass spec file we just downloaded. We can see it returns a handle to the file, which contains 4399 "scans". A scan being a mass spectrum. 
+```{r}
+msfile_handle <- mzR::openMSfile(peaks_file_path)
+msfile_handle
+```
+
+
+mzR uses [S3](https://adv-r.hadley.nz/s3.html) object oriented programming which is difficult if you are only used to R's usual functional programming style. You don't have to worry much about it because most of what I'll show is functional, but if you do care there are a number of object based methods you can use.
+
+We can see how mzR "opened/parsed" the file, here using C++ code from ProteoWizard.
+```{r}
+msfile_handle@backend
+```
+
+One of the most useful {mzR} functions is `header()` which provides summarizing information about each scan in the dataset. Each scan is numbered sequentially (seqNum/acquisitionNum).
+
+```{r}
+summary_data <- header(msfile_handle)
+head(summary_data, 5)
+```
+
+THis allows us to do things like filtering for only positive mode MS^2^ scans.
+```{r}
+filtered_df <- summary_data[summary_data$polarity == 1, ][summary_data$msLevel == 2, ]
+head(filtered_df, 5)
+```
+
+
+The other useful function I'll bring up in this post retrieves the actual mass spectra. If just provided the file handle it will load every scan in the file as a separate two-column matrix. For each matrix the first column represents m/z and the second column is intensity. If a scan number is provided it will return the two-column matrix for that specific scan.
+
+Let's look at the first five lines of the fourth scan/mass spectrum.
+```{r}
+# note: mzR::peaks() and mzR::spectra() are interchangeable
+single_spectrum <- mzR::peaks(msfile_handle, scans=4)
+head(single_spectrum, 5)
+```
+
+
+
+## Check our assumptions
+
+Whenever you get new data the first thing you should do is get a feel for the data and confirm any assumptions that could influence your analysis. Some, but not all of the ways you can do so are shown here.
+
+We can use `mzR::openMSfile()` to open the file in R.
+```{r}
+full_spectra_handle <- mzR::openMSfile(raw_mzml_path)
+```
+
+
+Using the `header()` function we can peak at the first 10 rows of the summary information about each spectrum in the file. This is not reading any spectra data yet but pulling metadata about each spectrum that is stored within the mzML file, as described in [post 2](../2_mzml/#where-are-the-spectra).
+We can see there is both MS^1^ and MS^2^ spectra i this file.
+
+### Are the number of data points for the MS^1^ and MS^2^ spectra within the range I expected? (`peaksCount` column)
+```{r}
+header_table <- header(full_spectra_handle)
+head(header_table, 10)
+```
+
+
+### Is this centroid or profile data?
+All the values in `header_table$centroided` are false so all the scans in the file are profile. This aligns with the large numbers seen in the `peaksCount` column above.
+```{r}
+table(header_table$centroided)
+```
+
+
+### What max intensities can I expect?
+```{r}
+summary(header_table$totIonCurrent)
+```
+
+
+### What are the min/max retention times?
+```{r}
+paste0("Minimum retention time: ", min(header_table$retentionTime), " s")
+paste0("Maximum retention time: ", max(header_table$retentionTime) , " s")
+```
+
+### Does the data contain positive or negative mode spectra? Both?
+
+Here it's positive because the only value within the `polarity` column is `1`
+```{r}
+table(header_table$polarity)
+```
+
+### How many MS^1^ MS^2^ scans are there?
+```{r}
+table(header_table$msLevel)
+```
+
+
+::: {.callout-note} 
+It should be noted that the `peaksCount` column has the same name whether you have loaded centroid or profile data and is best thought of as the number of data points within a single scan/spectrum.
+:::
+
+
+# Next
+
+In the [next post](../4_reanalysis/) we will do some introduction to analysis and plotting using the same data as in this post.
+

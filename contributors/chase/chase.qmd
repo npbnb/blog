@@ -32,7 +32,7 @@ bibliography: chase_references.bib
 
 
 ## Summary
-Chase is a Postdoctoral Research Associate at the University of Wisconsin-Madison where he was awarded and partially funded by a T32 Fellowship in the [Computation and Informatics in Biology and Medicine (CIBM) training program](https://cibm.wisc.edu/). Chase completed a PhD in Pharmacognosy with [Dr. Brian Murphy](https://www.murphylabuic.com) at the University of Illinois at Chicago where he was awarded and funded by [NIH F31 fellowship](https://www.nimh.nih.gov/funding/training/ruth-l-kirschstein-national-research-service-award-individual-predoctoral-fellowship-f31)
+Chase is a Postdoctoral Research Associate at the University of Wisconsin-Madison where he was awarded and partially funded by a T32 Fellowship in the [Computation and Informatics in Biology and Medicine (CIBM) training program](https://cibm.wisc.edu/). Chase completed a PhD in Pharmacognosy with [Dr. Brian Murphy](https://www.murphylabuic.com) at the University of Illinois at Chicago where he was awarded and funded by an [NIH F31 fellowship](https://www.nimh.nih.gov/funding/training/ruth-l-kirschstein-national-research-service-award-individual-predoctoral-fellowship-f31)
 
 Chase has >10 years of lab and computational experience surrounding natural products. Non-comprehensively, this spans analytical chemistry/biochemistry/microbiology method development and R&D at a small enzyme and probiotic manufacturer, to mass spectrometry method and software development in grad school, to engineering large scale genome mining and metagneomic software for drug discovery.
 

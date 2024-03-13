@@ -5,3 +5,5 @@
 **/.pixi/
 .github/CONTRIBUTING_files
 .github/CONTRIBUTING.html
+**/index_cache/
+**/index_files/

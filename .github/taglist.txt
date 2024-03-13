@@ -2,9 +2,11 @@ mass spectrometry
 nuclear magnetic resonance 
 genomics
 metagenomics
-intro
+beginner
+intermediate
 advanced
 python
 r
 bash
 nextflow
+chemistry

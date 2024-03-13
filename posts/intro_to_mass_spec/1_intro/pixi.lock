@@ -1,0 +1,629 @@
+version: 3
+metadata:
+  content_hash:
+    linux-64: d8e63e43cbbfab1a1c8fad921ad75f9eedde86da4f03555fd7ca254ffdfe45f1
+    osx-64: d8e63e43cbbfab1a1c8fad921ad75f9eedde86da4f03555fd7ca254ffdfe45f1
+    osx-arm64: d8e63e43cbbfab1a1c8fad921ad75f9eedde86da4f03555fd7ca254ffdfe45f1
+    win-64: d8e63e43cbbfab1a1c8fad921ad75f9eedde86da4f03555fd7ca254ffdfe45f1
+  channels:
+  - url: https://conda.anaconda.org/conda-forge/
+    used_env_vars: []
+  - url: https://conda.anaconda.org/bioconda/
+    used_env_vars: []
+  - url: https://conda.anaconda.org/anaconda/
+    used_env_vars: []
+  platforms:
+  - linux-64
+  - osx-64
+  - osx-arm64
+  - win-64
+  sources: []
+  time_metadata: null
+  git_metadata: null
+  inputs_metadata: null
+  custom_metadata: null
+package:
+- platform: linux-64
+  name: _libgcc_mutex
+  version: '0.1'
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
+  hash:
+    md5: d7c89558ba9fa0495403155b64376d81
+    sha256: fe51de6107f9edc7aa4f786a70f4a883943bc9d39b3bb7307c04c41410990726
+  build: conda_forge
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: None
+  size: 2562
+  timestamp: 1578324546067
+- platform: linux-64
+  name: _openmp_mutex
+  version: '4.5'
+  category: main
+  manager: conda
+  dependencies:
+  - _libgcc_mutex 0.1 conda_forge
+  - libgomp >=7.5.0
+  url: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-2_gnu.tar.bz2
+  hash:
+    md5: 73aaf86a425cc6e73fcf236a5a46396d
+    sha256: fbe2c5e56a653bebb982eda4876a9178aedfc2b545f25d0ce9c4c0b508253d22
+  build: 2_gnu
+  arch: x86_64
+  subdir: linux-64
+  build_number: 16
+  constrains:
+  - openmp_impl 9999
+  license: BSD-3-Clause
+  license_family: BSD
+  size: 23621
+  timestamp: 1650670423406
+- platform: linux-64
+  name: dart-sass
+  version: 1.58.3
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/linux-64/dart-sass-1.58.3-ha770c72_1.conda
+  hash:
+    md5: d54982a58cd9be3d00a7efe76ba6f60c
+    sha256: a94f8024ac8a09cbf265c62d2bd57e709802868ef656c6cafe5864ed20bf94af
+  build: ha770c72_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 2961769
+  timestamp: 1683598364427
+- platform: osx-64
+  name: dart-sass
+  version: 1.58.3
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/osx-64/dart-sass-1.58.3-h694c41f_1.conda
+  hash:
+    md5: 5151299fff69a62e792c79d1b726a470
+    sha256: d6bd5e712d55ef3e2b222fcb98eb20ab8e72042594e38369c28b8fb75ce7a1f8
+  build: h694c41f_1
+  arch: x86_64
+  subdir: osx-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 2810170
+  timestamp: 1683598628559
+- platform: osx-arm64
+  name: dart-sass
+  version: 1.58.3
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/dart-sass-1.58.3-hce30654_1.conda
+  hash:
+    md5: 7282e188f57f69f03378f149fcb8acf8
+    sha256: fcaf0653d18ccbc83845ddc41277bcf8394609bdaf3ccbafb48dcd4092a70c0d
+  build: hce30654_1
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 2544603
+  timestamp: 1683598631146
+- platform: win-64
+  name: dart-sass
+  version: 1.58.3
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/win-64/dart-sass-1.58.3-h57928b3_1.conda
+  hash:
+    md5: 717501926d44c46117979fc54892c560
+    sha256: b974772f376bea3afc8ecacf916fce3170b02604310c4a1d25fc39f1c44bd532
+  build: h57928b3_1
+  arch: x86_64
+  subdir: win-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 2846260
+  timestamp: 1683598954152
+- platform: linux-64
+  name: deno
+  version: 1.37.2
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  url: https://conda.anaconda.org/conda-forge/linux-64/deno-1.37.2-h335b0a9_1.conda
+  hash:
+    md5: 50fe6d0064adfd83846a6f9c87da03e3
+    sha256: b14a2f951839e1b511283ed135d31e1168e62c6f360d00ba55a52e38d2ed1e34
+  build: h335b0a9_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 33937403
+  timestamp: 1698785299272
+- platform: osx-64
+  name: deno
+  version: 1.37.2
+  category: main
+  manager: conda
+  dependencies:
+  - __osx >=10.11
+  url: https://conda.anaconda.org/conda-forge/osx-64/deno-1.37.2-h51b076b_1.conda
+  hash:
+    md5: d452ae5711d2261a9a2600c1c9cb95f1
+    sha256: ec5a5f6219ee6dda4dff7673af05321934ffa041ef71407509ac84f887e66b88
+  build: h51b076b_1
+  arch: x86_64
+  subdir: osx-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 28443709
+  timestamp: 1698786998658
+- platform: osx-arm64
+  name: deno
+  version: 1.37.2
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/deno-1.37.2-hce30654_1.conda
+  hash:
+    md5: 98041d72a6ee027b467e2014191ac25f
+    sha256: 40c59e8035a9e2c3a712053316c41ead55b22e94a5e9904d52b108d4f8c48ddc
+  build: hce30654_1
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 29940099
+  timestamp: 1698784034240
+- platform: win-64
+  name: deno
+  version: 1.37.2
+  category: main
+  manager: conda
+  dependencies:
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  url: https://conda.anaconda.org/conda-forge/win-64/deno-1.37.2-hc8b987e_1.conda
+  hash:
+    md5: 9e817ed60642f1c1b4d19f7998b3ff21
+    sha256: 075fd651513a4458a67ad7f1f635019d342b3047ba9b453acb1fc65f39279581
+  build: hc8b987e_1
+  arch: x86_64
+  subdir: win-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 27940247
+  timestamp: 1698788945614
+- platform: linux-64
+  name: deno-dom
+  version: 0.1.35
+  category: main
+  manager: conda
+  dependencies:
+  - deno >=1.24.2
+  url: https://conda.anaconda.org/conda-forge/linux-64/deno-dom-0.1.35-hd9586b0_1.conda
+  hash:
+    md5: 263ee0870b18b013d9ec8539113ac69f
+    sha256: 386c157bf2eebe4fc58e63c26784d084eaa71cf1020257c30a430624631415fd
+  build: hd9586b0_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 1062480
+  timestamp: 1682953401972
+- platform: osx-64
+  name: deno-dom
+  version: 0.1.35
+  category: main
+  manager: conda
+  dependencies:
+  - deno >=1.24.2
+  url: https://conda.anaconda.org/conda-forge/osx-64/deno-dom-0.1.35-h08cba0f_1.conda
+  hash:
+    md5: a066a401b756000c623b09113f59f9c1
+    sha256: b743fc9a6bcb5991321a4a7c35fcdac04b64b13b232f624052b34e31585a2e74
+  build: h08cba0f_1
+  arch: x86_64
+  subdir: osx-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 372486
+  timestamp: 1682953705956
+- platform: osx-arm64
+  name: deno-dom
+  version: 0.1.35
+  category: main
+  manager: conda
+  dependencies:
+  - deno >=1.24.2
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/deno-dom-0.1.35-hb9e0d3b_1.conda
+  hash:
+    md5: 15158274af1f4064563645d278c07a79
+    sha256: c5d93aa2c31af9ff7234ad95a65d166418e71d111f88fe7158c9d21eb5a49dd1
+  build: hb9e0d3b_1
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 373555
+  timestamp: 1682953826826
+- platform: win-64
+  name: deno-dom
+  version: 0.1.35
+  category: main
+  manager: conda
+  dependencies:
+  - deno >=1.24.2
+  url: https://conda.anaconda.org/conda-forge/win-64/deno-dom-0.1.35-h8b8d39b_1.conda
+  hash:
+    md5: e1b95d707e592ee1f8d20986c449d927
+    sha256: b8368da706bb912606eb5063e1535fe3075a23c063461a13cf95d05567ae4e15
+  build: h8b8d39b_1
+  arch: x86_64
+  subdir: win-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 298218
+  timestamp: 1682953841090
+- platform: linux-64
+  name: esbuild
+  version: 0.19.2
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/linux-64/esbuild-0.19.2-ha770c72_0.conda
+  hash:
+    md5: 8fa87b764cf6143cb66e9cc3548b186a
+    sha256: bb6dee100b3f62ee088a212834c9d47ad158f3fc678ff595e402803db5fab871
+  build: ha770c72_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  size: 3376650
+  timestamp: 1693243729127
+- platform: osx-64
+  name: esbuild
+  version: 0.19.2
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/osx-64/esbuild-0.19.2-h694c41f_0.conda
+  hash:
+    md5: 61cc0fd0aa08d9a37b2df02b88c00203
+    sha256: 3c52971d424630e4e5e749208c144bd070b94ae404aa8ea72ae20c9e5300517d
+  build: h694c41f_0
+  arch: x86_64
+  subdir: osx-64
+  build_number: 0
+  constrains:
+  - __osx>=10.12
+  license: MIT
+  license_family: MIT
+  size: 3465734
+  timestamp: 1693243810332
+- platform: osx-arm64
+  name: esbuild
+  version: 0.19.2
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/esbuild-0.19.2-hce30654_0.conda
+  hash:
+    md5: 9aacf373feb68fbf6cab70db465777eb
+    sha256: 73c7100fc6521a6e261b4aa8c2f2630c970cec8a54d5b7945873293e8f0c6f98
+  build: hce30654_0
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  size: 3268434
+  timestamp: 1693243834619
+- platform: win-64
+  name: esbuild
+  version: 0.19.2
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/win-64/esbuild-0.19.2-h57928b3_0.conda
+  hash:
+    md5: 7250cb4e9c20f9f7acdf4b523844ad90
+    sha256: 7a6354b23d03a4eaff672e4d20cf4a6c554da31be506050055af97f4b023a8b9
+  build: h57928b3_0
+  arch: x86_64
+  subdir: win-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  size: 3430198
+  timestamp: 1693244283213
+- platform: linux-64
+  name: libgcc-ng
+  version: 13.2.0
+  category: main
+  manager: conda
+  dependencies:
+  - _libgcc_mutex 0.1 conda_forge
+  - _openmp_mutex >=4.5
+  url: https://conda.anaconda.org/conda-forge/linux-64/libgcc-ng-13.2.0-h807b86a_5.conda
+  hash:
+    md5: d4ff227c46917d3b4565302a2bbb276b
+    sha256: d32f78bfaac282cfe5205f46d558704ad737b8dbf71f9227788a5ca80facaba4
+  build: h807b86a_5
+  arch: x86_64
+  subdir: linux-64
+  build_number: 5
+  constrains:
+  - libgomp 13.2.0 h807b86a_5
+  license: GPL-3.0-only WITH GCC-exception-3.1
+  license_family: GPL
+  size: 770506
+  timestamp: 1706819192021
+- platform: linux-64
+  name: libgomp
+  version: 13.2.0
+  category: main
+  manager: conda
+  dependencies:
+  - _libgcc_mutex 0.1 conda_forge
+  url: https://conda.anaconda.org/conda-forge/linux-64/libgomp-13.2.0-h807b86a_5.conda
+  hash:
+    md5: d211c42b9ce49aee3734fdc828731689
+    sha256: 0d3d4b1b0134283ea02d58e8eb5accf3655464cf7159abf098cc694002f8d34e
+  build: h807b86a_5
+  arch: x86_64
+  subdir: linux-64
+  build_number: 5
+  license: GPL-3.0-only WITH GCC-exception-3.1
+  license_family: GPL
+  size: 419751
+  timestamp: 1706819107383
+- platform: linux-64
+  name: pandoc
+  version: 3.1.11.1
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/linux-64/pandoc-3.1.11.1-ha770c72_0.conda
+  hash:
+    md5: 0e2f14aff42adf4675bcd5335d644a5f
+    sha256: 30b1318dbf7a89d4b2f66a9b10c8799376a32506043a510e1d27ba286c564633
+  build: ha770c72_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 20502973
+  timestamp: 1707474170203
+- platform: osx-64
+  name: pandoc
+  version: 3.1.11.1
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/osx-64/pandoc-3.1.11.1-h694c41f_0.conda
+  hash:
+    md5: 6cff44b16d1231fe9682c64d12ab66a5
+    sha256: 3adbae2ba5d78c45c9ec9d802b820c2e659129b7ba044cc76487ce33dbc800f2
+  build: h694c41f_0
+  arch: x86_64
+  subdir: osx-64
+  build_number: 0
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 13738785
+  timestamp: 1707474535801
+- platform: osx-arm64
+  name: pandoc
+  version: 3.1.11.1
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/pandoc-3.1.11.1-hce30654_0.conda
+  hash:
+    md5: bb4cbaefaa40290fc4bb09b224bc2ebb
+    sha256: 80044e15ee1ffeb52ab8b36270b5cb99b56027aabd4e2e7aa1814087ceb6317a
+  build: hce30654_0
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 0
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 22163163
+  timestamp: 1707474489386
+- platform: win-64
+  name: pandoc
+  version: 3.1.11.1
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/win-64/pandoc-3.1.11.1-h57928b3_0.conda
+  hash:
+    md5: 81747ed06ea58a00b41ea15bf6e1fe30
+    sha256: 84cbba7f556b173c84cb3aba6a43ff088dd4808d529a598e5fd124dca710bc1b
+  build: h57928b3_0
+  arch: x86_64
+  subdir: win-64
+  build_number: 0
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 24254504
+  timestamp: 1707474734217
+- platform: linux-64
+  name: quarto
+  version: 1.4.550
+  category: main
+  manager: conda
+  dependencies:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.11.1,<3.1.12.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/quarto-1.4.550-ha770c72_1.conda
+  hash:
+    md5: b7b89be76bcdab239f7956e5fc2727ab
+    sha256: 2fd62d66eb6a08b95ba8933aaff7a0e3241c7ced93b5114a3b1e8d28ee24b330
+  build: ha770c72_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15312136
+  timestamp: 1708104283642
+- platform: osx-64
+  name: quarto
+  version: 1.4.550
+  category: main
+  manager: conda
+  dependencies:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.11.1,<3.1.12.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-64/quarto-1.4.550-h694c41f_1.conda
+  hash:
+    md5: 451204adcf15c8411d12ba240e7e979a
+    sha256: 914a1b22f3b9616309ee6a066c50707cab37de0e9eb23cd0db3488d05c3991c1
+  build: h694c41f_1
+  arch: x86_64
+  subdir: osx-64
+  build_number: 1
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15721907
+  timestamp: 1708104547618
+- platform: osx-arm64
+  name: quarto
+  version: 1.4.550
+  category: main
+  manager: conda
+  dependencies:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.11.1,<3.1.12.0a0
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/quarto-1.4.550-hce30654_1.conda
+  hash:
+    md5: c4f8e6eebc75e160a9cbf1eb95cd7a1e
+    sha256: 593932b9e2150f55b0a52986a44415cc9662a1ed2fec14804c0b8406a9dc3560
+  build: hce30654_1
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 1
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15945176
+  timestamp: 1708104523700
+- platform: win-64
+  name: quarto
+  version: 1.4.550
+  category: main
+  manager: conda
+  dependencies:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.11.1,<3.1.12.0a0
+  url: https://conda.anaconda.org/conda-forge/win-64/quarto-1.4.550-h57928b3_1.conda
+  hash:
+    md5: d92f625feb8436864b4bfd2bc7f420da
+    sha256: 6415fc839ad74202b20ed7781de3aa076f0bc202f7dd977e6ea782dfb00def71
+  build: h57928b3_1
+  arch: x86_64
+  subdir: win-64
+  build_number: 1
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15688899
+  timestamp: 1708104504691
+- platform: win-64
+  name: ucrt
+  version: 10.0.22621.0
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/win-64/ucrt-10.0.22621.0-h57928b3_0.tar.bz2
+  hash:
+    md5: 72608f6cd3e5898229c3ea16deb1ac43
+    sha256: f29cdaf8712008f6b419b8b1a403923b00ab2504bfe0fb2ba8eb60e72d4f14c6
+  build: h57928b3_0
+  arch: x86_64
+  subdir: win-64
+  build_number: 0
+  constrains:
+  - vs2015_runtime >=14.29.30037
+  license: LicenseRef-Proprietary
+  license_family: PROPRIETARY
+  size: 1283972
+  timestamp: 1666630199266
+- platform: win-64
+  name: vc
+  version: '14.3'
+  category: main
+  manager: conda
+  dependencies:
+  - vc14_runtime >=14.38.33130
+  url: https://conda.anaconda.org/conda-forge/win-64/vc-14.3-hcf57466_18.conda
+  hash:
+    md5: 20e1e652a4c740fa719002a8449994a2
+    sha256: 447a8d8292a7b2107dcc18afb67f046824711a652725fc0f522c368e7a7b8318
+  build: hcf57466_18
+  arch: x86_64
+  subdir: win-64
+  build_number: 18
+  track_features: vc14
+  license: BSD-3-Clause
+  license_family: BSD
+  size: 16977
+  timestamp: 1702511255313
+- platform: win-64
+  name: vc14_runtime
+  version: 14.38.33130
+  category: main
+  manager: conda
+  dependencies:
+  - ucrt >=10.0.20348.0
+  url: https://conda.anaconda.org/conda-forge/win-64/vc14_runtime-14.38.33130-h82b7239_18.conda
+  hash:
+    md5: 8be79fdd2725ddf7bbf8a27a4c1f79ba
+    sha256: bf94c9af4b2e9cba88207001197e695934eadc96a5c5e4cd7597e950aae3d8ff
+  build: h82b7239_18
+  arch: x86_64
+  subdir: win-64
+  build_number: 18
+  constrains:
+  - vs2015_runtime 14.38.33130.* *_18
+  license: LicenseRef-ProprietaryMicrosoft
+  license_family: Proprietary
+  size: 749868
+  timestamp: 1702511239004

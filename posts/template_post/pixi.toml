@@ -7,6 +7,7 @@ platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 install_python_package_from_git= {cmd="pip install git+https://github.com/socialgene/sgpy@63c15e7367c6b31d47802412d03ae47c6f6a0b8b"}
 
 [dependencies]
+quarto = "==1.4.550" # Don't modify this line
 python = "==3.12.1"
 r-base = "==4.1.3"
 pip = ">=23.3.2,<23.4"

@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Computational Pharmacognosy"
+  google-analytics: "G-R3J5ZWX2XP"
   navbar:
     right:
       - text: Posts
@@ -12,8 +13,6 @@ website:
       - sidebar:contributors
       - icon: github
         href: https://github.com/Code4NP/code4np.github.io
-
-
   sidebar:
     - id: contributors
       title: "Contributors"
@@ -25,15 +24,13 @@ website:
           file: contributors/chase/chase.qmd
         - text: Joe
           file: contributors/joe/joe.qmd
-
-
-
   site-url: https://code4np.github.io
 format:
   html:
     theme: cosmo
     css: styles.css
-    page-layout: full
-
-
-
+    grid:
+      sidebar-width: 300px
+      body-width: 1000px
+      margin-width: 300px
+      gutter-width: 1.5rem
