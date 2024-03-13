@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://code4np.github.io/contributors/chase/chase.html</loc>
-    <lastmod>2024-03-12T19:18:11.044Z</lastmod>
-  </url>
-  <url>
     <loc>https://code4np.github.io/index.html</loc>
-    <lastmod>2024-03-12T19:18:11.044Z</lastmod>
+    <lastmod>2024-03-13T14:27:25.976Z</lastmod>
   </url>
   <url>
-    <loc>https://code4np.github.io/posts/intro_to_mass_spec/1_intro/index.html</loc>
-    <lastmod>2024-03-12T19:18:11.048Z</lastmod>
-  </url>
-  <url>
-    <loc>https://code4np.github.io/posts/intro_to_mass_spec/3_spectra/index.html</loc>
-    <lastmod>2024-03-12T19:18:11.048Z</lastmod>
-  </url>
-  <url>
-    <loc>https://code4np.github.io/posts/intro_to_mass_spec/4_reanalysis/index.html</loc>
-    <lastmod>2024-03-12T19:18:11.048Z</lastmod>
+    <loc>https://code4np.github.io/contributors/chase/chase.html</loc>
+    <lastmod>2024-03-13T14:27:25.976Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/posts/intro_to_mass_spec/2_mzml/index.html</loc>
-    <lastmod>2024-03-12T19:18:11.048Z</lastmod>
+    <lastmod>2024-03-13T14:27:25.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://code4np.github.io/posts/intro_to_mass_spec/4_reanalysis/index.html</loc>
+    <lastmod>2024-03-13T14:27:25.980Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/posts/chemsim_2024_02_28/index.html</loc>
-    <lastmod>2024-03-12T19:18:11.044Z</lastmod>
+    <lastmod>2024-03-13T14:27:25.976Z</lastmod>
   </url>
   <url>
-    <loc>https://code4np.github.io/about/about.html</loc>
-    <lastmod>2024-03-12T19:18:11.044Z</lastmod>
+    <loc>https://code4np.github.io/posts/intro_to_mass_spec/1_intro/index.html</loc>
+    <lastmod>2024-03-13T14:27:25.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://code4np.github.io/posts/intro_to_mass_spec/3_spectra/index.html</loc>
+    <lastmod>2024-03-13T14:27:25.980Z</lastmod>
   </url>
   <url>
     <loc>https://code4np.github.io/contributors/joe/joe.html</loc>
-    <lastmod>2024-03-12T19:18:11.044Z</lastmod>
+    <lastmod>2024-03-13T14:27:25.976Z</lastmod>
+  </url>
+  <url>
+    <loc>https://code4np.github.io/about/about.html</loc>
+    <lastmod>2024-03-13T14:27:25.976Z</lastmod>
   </url>
 </urlset>
