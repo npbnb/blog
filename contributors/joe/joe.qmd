@@ -1,6 +1,6 @@
 ---
 title: "Joe"
-image: about.jpeg
+image: Biopic_sized.png
 about:
   template: trestles
   links:
@@ -13,7 +13,9 @@ about:
     - icon: github
       text: Github
       href: https://github.com/Jmegan042
-
+      
+csl:  nature.csl
+bibliography: joe_references.bib
 ---
 ## Posts by Joe:
 
