@@ -8,9 +8,6 @@ about:
       text: Twitter
       href: https://twitter.com
     - icon: linkedin
-      text: LinkedIn-Chase Clark
-      href: https://www.linkedin.com/in/hirechase
-    - icon: linkedin
       text: LinkedIn-Joseph Egan
       href: https://www.linkedin.com/in/joseph-m-egan
     - icon: github
@@ -18,7 +15,38 @@ about:
       href: https://github.com/npbnb
 
 ---
+## Posts by Joe:
 
-This blog was started by two pharmacosisgnosist who realized that our field requires a diverse set of in-demand informatics skills but that there are limited University programs offering detailed instruction on code-based analysis of the wide array of analytical techniques we encounter every dat. Here we hope to share some of our own experience in using code to analyze the chemical and biological data a pharmacognosist is ikely to encounter in the modern era.
+::: {#sample-listings}
+:::
 
-(image created with DALL·E 3)
+## Summary
+Joe is the Director of Product at Ometa Labs LLC, where he works on developing tools for mass spectrometry. Joe recieved his Bachelors and Masters degrees at UNC Greensboro under the training of Dr. Nadja Cech and completed his PhD in Chemistry at Simon Fraser University with Dr. Roger Linington working in NMR Metabolomics. While at SFU, Joe was awarded and funded by the [NIH F31 fellowship](https://www.nimh.nih.gov/funding/training/ruth-l-kirschstein-national-research-service-award-individual-predoctoral-fellowship-f31). 
+
+Joe has worked in natrual products for over a decade, working with botanical, fungal, and bacterial sources. He has training in microbial and fungal cultivation, compound isolation and characterization, biological assay development, and metabolomics data analysis. After completing his PhD, Joe moved into software development and machine learning where he applies his previous experience to design user-focused tools for complex datasets. 
+
+Joe enjoys fishing, playing live music, and riding his motorcycle through the Michigan countryside. 
+
+## Education
+
+**Simon Fraser University** | Burnaby, BC, Canada| 
+Ph.D. Chemistry | 2015 - 2021
+
+**UNC Greensboro** | Greensboro, NC | 
+B.S. Biochemistry | 2009-2015
+
+## Experience
+
+**Ometa Labs LLC** | Director of Product | 2021 - present
+
+**Data Revenue GmbH** | Mass Spectrometry Metabolomics Engineer and Science Writer | 2021-2022
+
+
+---
+nocite: |
+  @*
+---
+### Publications
+
+::: {#refs}
+:::
