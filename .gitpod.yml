@@ -1,0 +1,11 @@
+tasks:
+  - init: |
+      mkdir -p $HOME/bin
+      curl -Ls https://github.com/prefix-dev/pixi/releases/download/v0.30.0/pixi-x86_64-unknown-linux-musl -o $HOME/bin/pixi
+      chmod +x $HOME/bin/pixi
+      wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.57/quarto-1.5.57-linux-amd64.tar.gz
+      tar -xvzf quarto-1.5.57-linux-amd64.tar.gz
+      mv quarto-1.5.57/bin/quarto $HOME/bin/
+      export PATH="$HOME/bin:$PATH"
+      rm quarto-1.5.57-linux-amd64.tar.gz
+      rm -r quarto-1.5.57
