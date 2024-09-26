@@ -8,3 +8,4 @@ tasks:
       mv quarto-1.5.57/bin/quarto $HOME/bin/
       export PATH="$HOME/bin:$PATH"
       rm quarto-1.5.57-linux-x86_64.tar.gz
+      rm quarto-1.5.57-linux-x86_64
