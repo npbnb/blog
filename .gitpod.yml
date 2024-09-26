@@ -1,0 +1,7 @@
+tasks:
+  - init: |
+      curl -Ls https://github.com/prefix-dev/pixi/releases/download/v0.30.0/pixi-x86_64-unknown-linux-musl -o /usr/local/bin/pixi
+      chmod +x /usr/local/bin/pixi
+      wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.57/quarto-1.5.57-linux-amd64.deb && \
+      dpkg -i quarto-*.deb && \
+      rm quarto-*.deb
