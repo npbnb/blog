@@ -25,12 +25,15 @@ build_docker_dev:
 
 ## render:	Render a post (e.g. make render posts/example_dir/index.ipynb)
 render: build_docker_dev
-	mkdir -p $$(dirname $${i})/index_files $$(dirname $${i})/index_cache && \
+	mkdir -p $(realpath $(dir $(filter-out $@,$(MAKECMDGOALS))))/index_files $(realpath $(dir $(filter-out $@,$(MAKECMDGOALS))))/index_cache && \
 	docker run -it \
-		-v "$(realpath $(dir $(filter-out $@,$(MAKECMDGOALS))))":/repo \
+		-v $(realpath $(dir $(filter-out $@,$(MAKECMDGOALS)))):/repo \
 		-u $(shell id -u):$(shell id -g) \
 		code4np_base:dev \
 		/bin/bash -c 'pixi run quarto render $(notdir $(filter-out $@,$(MAKECMDGOALS)))'
+
+
+
 
 ## render_all_posts :	Render all posts
 render_all_posts: build_docker_dev
