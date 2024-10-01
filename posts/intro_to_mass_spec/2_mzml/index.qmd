@@ -7,16 +7,16 @@ author:
 categories: [beginner, mass spectrometry, r]
 date: "2024-02-02"
 description: "What mass spectrometry data looks like, using R"
-execute: 
+execute:
   cache: true
   freeze: true
 format:
   html:
     df-print: paged
 filters:
-  - collapse-callout
+  - collapse-callout.lua
 collapse-callout:
-  all: true  
+  all: true
 ---
 
 This is a continuation from [Part 1](../1_intro/).

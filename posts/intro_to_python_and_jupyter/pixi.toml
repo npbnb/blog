@@ -1,0 +1,17 @@
+[project]
+name = "intro_python_jupyter"
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[dependencies]
+python = "==3.12.1"
+pip = ">=23.3.2,<23.4"
+
+
+[pypi-dependencies]
+numpy="==1.26.*"
+
+# See more config options at 
+# https://pixi.sh/configuration/
+
+# fill out like an evn yaml

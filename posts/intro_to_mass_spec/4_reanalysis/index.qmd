@@ -7,16 +7,16 @@ author:
 categories: [beginner, mass spectrometry, r]
 date: "2024-02-04"
 description: "An introduction to working with mass spectrometry data in R"
-execute: 
+execute:
   cache: true
   freeze: true
 format:
   html:
     df-print: paged
 filters:
-  - collapse-callout
+  - collapse-callout.lua
 collapse-callout:
-  all: true  
+  all: true
 ---
 
 This is a continuation from [Part 3](../3_spectra/).
