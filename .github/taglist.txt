@@ -10,3 +10,5 @@ r
 bash
 nextflow
 chemistry
+computing hardware
+other

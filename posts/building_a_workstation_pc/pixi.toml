@@ -1,0 +1,14 @@
+[project]
+name = "project-name"
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[tasks]
+
+[dependencies]
+quarto = "==1.4.550" # Don't modify this line
+
+[pypi-dependencies]
+
+# See more config options at 
+# https://pixi.sh/configuration/

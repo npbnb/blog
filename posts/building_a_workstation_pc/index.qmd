@@ -1,0 +1,202 @@
+---
+title: "Building a PC for informatics!"
+author:
+  - name: 
+      given: Chase
+      family: Clark
+      non-dropping-particle: M
+    roles: [original draft, review & editing]
+    url: https://chasemc.github.io
+    affiliation: EVOQUANT LLC
+    orcid: 0000-0001-6439-9397
+categories: [computing hardware, other]
+date: "2025-01-30"
+description: "Information about the parts list, building, and setting up a new PC for bioinformatics."
+draft: false
+appendix-cite-as: display
+funding: "The author(s) received no specific funding for this work."
+citation: true
+---
+
+Disclaimer: I recently left UW-Madison and am now the owner of Evoquant LLC. Currently we do consulting/freelance bioinformatics work but also have an SBIR submitted in the area of drug discovery. If I ever have a conflict of interest in future posts I will remind readers.
+
+# Intro
+To support my clients, and near future business ventures, I needed to build a new workstation PC (I only had a crappy, overheating, 2020 MacBook Air) that could handle small to medium size informatics jobs. 
+
+For highly parallel jobs and super-high memory jobs it is often better to just rent on AWS, etc. But having adequate "on-prem" (on-premises) compute is also really helpful and provides value for us and our customers.
+
+That said, the workstation described below is a pretty beefy setup and would serve the needs of most labs that aren't doing super high RAM tasks like metagenome assembly.
+
+# Hardware
+
+## PC parts list
+
+Without discounts, you can expect the following to cost ~$2000. Parts list: [https://pcpartpicker.com/list/n7KQGJ](https://pcpartpicker.com/list/n7KQGJ)
+
+- **Motherboard**: MSI MAG B650 TOMAHAWK WIFI
+- **CPU**: AMD Ryzen 9 7950X 16-Core Processor
+- **RAM**: Corsair Vengeance 96 GB DDR5 (48 GB X 2)
+- **CPU Cooler**: Arctic Liquid Freezer III 360
+- **Case**: Lian Li Lancool II MESH Type C
+- **PSU**: Corsair RM850e 850W
+- **GPU**: ASUS Dual GeForce RTX 3060
+- **Main Drive**: Samsung 990 PRO PCIe 4.0 NVMe M.2 SSD (4 TB)
+- **Extra Drives**: WD RED Plus 8TB 3.5 in HDD
+
+## Assembly
+
+If you've never built a PC before it's honestly not that hard once you have compatible parts all picked out. Just follow the manuals and look things up if you are confused, it's just like working in the lab. Remember the first time you ran a PCR?  
+
+Because it's 2025 and there's a YouTube video for everything, I'd suggest [this one](https://www.youtube.com/watch?v=s1fxZ-VWs2U) which covers all the steps.
+
+# Operating system
+
+By the magick of blogging, the computer is now assembled; but when you turn it on there's no internet browser, nothing familiar, just a screen full of complicated settings, fan and temp info, etc. This is the BIOS screen and it means you still need an operating system (Windows, Linux, etc.)
+
+
+## Install Ubuntu
+
+For the past 5 years I've managed to run my day to to day and 90% of my bioinformatics tasks (minus a couple mass spec/NMR tools) from an Ubuntu Linux based system. If you are doing primarily mass spectrometry or NMR or use mostly Windows-only software you can either stop here and just install Windows, or install Linux and Windows side-by-side in dual boot. But here we are sticking with Ubuntu only.
+
+To create a bootable USB stick and install Ubuntu on the compute follow the directions [here](https://ubuntu.com/tutorials/install-ubuntu-desktop).
+
+Note: Be very careful during installation if you are installing Ubuntu onto a hard drive that already has data on it. Ideally make a backup of that data first and then follow all of the steps carefully as there is the potentiall to erase everything on it.
+
+# Setting up the basics the way Chase likes (optional)
+
+Ubuntu is now installed on the new computer, we are logged in, and have connected to the internet via Wi-Fi or Ethernet.
+
+## Update Linux packages
+
+Open the terminal and update the default packages.
+
+```bash
+sudo apt get update
+sudo apt update
+```
+
+## Install software I use often, globally
+
+- [curl](https://curl.se/) is used by almost everything that interacts with the internet. If you've ever seen [this xkcd cartoon](https://xkcd.com/2347/), it's referencing curl.
+- [git](https://git-scm.com/) is specific to software development, you may or may not want it.
+- [ncdu](https://en.wikipedia.org/wiki/Ncdu) is useful for finding where large files are on your hard drive(s).
+
+Seperate commands below so it's easier to modify
+```bash
+sudo apt install curl
+sudo apt install ncdu
+sudo apt install git
+```
+
+- [coolercontrol](https://gitlab.com/coolercontrol/coolercontrol) is something I am trying out for the first time.
+
+```bash
+# optional, allows you to monitor the temps of your PC components
+sudo apt install coolercontrol
+sudo systemctl enable coolercontrold --now
+```
+
+
+To setup git to work with your GitHub account follow the directions to install gh for easier authentication: https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+
+Then run `gh auth login` and follow the prompts.
+
+
+## Install micromamba
+
+[Mamba](https://mamba.readthedocs.io/en/latest/) is faster than [Conda](https://docs.conda.io/en/latest/) and [micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) is mamba but... micro. Lately, I've been playing around with [pixi](https://prefix.dev/) (and all this blog's posts use it), but I haven't yet downloaded it to this new computer.
+
+```bash
+
+"${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+micromamba
+```
+
+## Create a Python 3.12 Conda environment
+
+```bash
+micromamba activate
+micromamba create --name py312 python=3.12
+micromamba activate py312
+pip install bpytop rich
+```
+
+## Modify .bashrc
+
+I launch the [Python REPL](https://docs.python.org/3/tutorial/interpreter.html) in the the terminal very frequently. The following just saves me time by aliasing 'p' in Bash to mean 'python'. So, I open a terminal, type p, hit enter and I'm inside Python's REPL.
+
+```bash
+echo "
+alias p='python'
+" >> ~/.bashrc
+```
+
+## Run something every time Python is opened
+
+I'm not a fan of startup imports/scripts in langauages like Python and R. However, for Python I find myself using [Rich's](https://github.com/Textualize/rich) inspect so often that I have made it auto import.
+
+```bash 
+echo """try:
+    from rich import inspect
+    print(\"Imported 'from rich import inspect' as instructed by \$HOME/.pythonrc\")
+except ImportError:
+    pass
+""" > $HOME/.pythonrc
+```
+```bash
+echo "
+export PYTHONSTARTUP=$HOME/.pythonrc
+" >> ~/.bashrc
+```
+
+## Install Docker
+
+Instructions for installing Docker were taken from [here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
+
+```bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+```bash
+# Install docker and components
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+```bash
+# Test
+sudo docker run hello-world
+```
+
+## Make Docker run without `sudo`
+Commands from [https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+)
+
+```bash
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# get out of sudo mode with `sudo -k`
+sudo -k
+newgrp docker
+docker run hello-world
+```
+
+If `docker run hello-world` results in permission issues you may need to restart the computer then try again.
+
+## Other
+I just used Ubuntu's App Center application to install VScode and GitKraken. Maybe I'll regret this later (in the past I've run into snags using Snap).
+
+
+
